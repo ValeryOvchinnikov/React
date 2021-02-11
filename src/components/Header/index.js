@@ -1,11 +1,2 @@
-import React from "react";
-import "./Header.css";
-function Header() {
-  return (
-    <div className="header">
-      <h1>Header</h1>
-    </div>
-  );
-}
-
+import Header from "./Header.js";
 export default Header;

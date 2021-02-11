@@ -2,7 +2,7 @@ import "./App.css";
 import Card from "./components/Card";
 import Header from "./components/Header";
 
-function App() {
+const App = () => {
   const cardStyle = {
     margin: "2%",
   };
@@ -10,10 +10,10 @@ function App() {
     <div className="App">
       <Header />
       <div style={cardStyle}>
-        <Card />
+        <Card title="Card Name" text="Text" />
       </div>
     </div>
   );
-}
+};
 
 export default App;
