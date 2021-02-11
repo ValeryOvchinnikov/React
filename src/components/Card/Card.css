@@ -1,17 +1,16 @@
-.Card {
-    width: 200px;
-    margin: 2%;
+.card {
     border: 2px solid #3a2e85;
     box-shadow: 1px 1px 20px 0 #3a2e85;
     background-color: #2c17b1;
     color: #ffffff;
+    width: 200px;
 }
 
-.Card h4 {
+.cardTitle {
     margin-top: 5%;
     margin-bottom: 1%;
 }
-.Card hr {
+.cardLine {
     width: 100%;
     color: #1f81dd;
     background-color: #1f81dd;

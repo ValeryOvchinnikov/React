@@ -3,10 +3,15 @@ import Card from "./components/Card";
 import Header from "./components/Header";
 
 function App() {
+  const cardStyle = {
+    margin: "2%",
+  };
   return (
     <div className="App">
       <Header />
-      <Card />
+      <div style={cardStyle}>
+        <Card />
+      </div>
     </div>
   );
 }
