@@ -6,9 +6,9 @@
     width: 200px;
 }
 
-.cardInput { 
-    left: '20%',
-
+.cardInput {
+    position: relative; 
+    left:20%
 }
 .cardTitle {
     display: inline;
