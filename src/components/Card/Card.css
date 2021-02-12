@@ -3,6 +3,9 @@
     box-shadow: 1px 1px 20px 0 #3a2e85;
     color: #ffffff;
     width: 200px;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
 }
 
 .cardInput {
@@ -13,11 +16,11 @@
 .cardTitle {
     display: inline;
     margin: auto;
-    margin-top: 5%;
-    margin-bottom: 1%;
+    
 }
 .cardLine {
     width: 100%;
     color: #1f81dd;
     background-color: #1f81dd;
+    margin: auto;
 }
