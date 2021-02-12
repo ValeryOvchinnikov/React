@@ -6,7 +6,13 @@
     width: 200px;
 }
 
+.cardInput { 
+    left: '20%',
+
+}
 .cardTitle {
+    display: inline;
+    margin: auto;
     margin-top: 5%;
     margin-bottom: 1%;
 }
