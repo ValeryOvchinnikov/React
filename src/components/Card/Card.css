@@ -3,24 +3,90 @@
     box-shadow: 1px 1px 20px 0 #3a2e85;
     color: #ffffff;
     width: 200px;
-    text-align: center;
+    position: relative;
+    height: 100%;
     vertical-align: middle;
     overflow: hidden;
 }
 
-.cardInput {
-    position: relative;
-    left: 20%;
+.cardHeader {
+    height: 100%;
+    display: flex;
+    font-size: 20px;
+    justify-content: space-between;
+    text-align: left;
+    letter-spacing: 0.5px;
+}
+
+.cardHeader h4 {
+    height: 100%;
+}
+.buttons {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    justify-content: space-evenly;
+}
+
+.checkbox,
+.btnEdit,
+.btnSave,
+.btnCancel {
+    padding: 2px;
+    background-color: inherit;
+    border: none;
+    color: white;
+    outline: none;
+    align-self: baseline;
+    flex-shrink: 1;
+}
+.inputTitle {
+    margin: 0px;
+    width: 100%;
+    height: 20px;
+    background-color: white;
+    color: black;
+    font: inherit;
+    letter-spacing: inherit;
+    border-color: 3px solid #5e4bd8;
+    border-radius: 6px;
 }
 
 .cardTitle {
-    display: inline;
-    margin: auto;
-    
+    word-wrap: break-word;
+
+    max-width: 153px;
+    height: 100%;
+
+    bottom: 5px;
+    padding-left: 4px;
 }
 .cardLine {
-    width: 100%;
-    color: #1f81dd;
-    background-color: #1f81dd;
+    background-color: white;
+    width: 95%;
+    height: 1px;
     margin: auto;
+}
+.cardBody {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.cardText {
+    margin: 2px;
+    padding: 3px;
+    width: 95%;
+
+    word-wrap: break-word;
+}
+
+.inputText {
+    margin: 3px;
+    border: none;
+    text-align: left;
+    font: inherit;
+    letter-spacing: inherit;
+    resize: none;
+    width: 96%;
+    height: 100%;
 }

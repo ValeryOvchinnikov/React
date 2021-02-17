@@ -9,7 +9,7 @@ const App = () => {
         <div className="App">
             <Header />
             <div style={cardStyle}>
-                <Card title="Card Name" text="Text" />
+                <Card />
             </div>
         </div>
     );
