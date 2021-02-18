@@ -42,9 +42,7 @@ const Card = props => {
             <div className="cardHeader">
                 {!isEdit ? (
                     <>
-                        <h4 classN ame="cardTitle">
-                            {currentTitle}
-                        </h4>
+                        <h4 className="cardTitle">{currentTitle}</h4>
                         <div className="buttons">
                             <button className="btnEdit" onClick={editMode}>
                                 <FiEdit2 />

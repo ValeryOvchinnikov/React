@@ -38,9 +38,11 @@
     outline: none;
     align-self: baseline;
     flex-shrink: 1;
+    transform: scale(1.4);
 }
 
 .cardHeader h4 {
+    
     margin: 5px;
     
 }
@@ -58,7 +60,7 @@
 
 .cardTitle {
     word-wrap: break-word;
-    margin-left:5px;
+    margin-left:11px;
 
     max-width: 153px;
     height: 100%;
