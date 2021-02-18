@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import './Card.css';
 import { FiEdit2, FiSave, FiXCircle } from 'react-icons/fi';
 
-const Card = () => {
+const Card = props => {
+    const { title, text } = props;
+
     const [isEdit, setEdit] = useState(false);
     const [isChecked, setChecked] = useState(false);
 
-    const [title, setTitle] = useState('Title');
-    const [text, setText] = useState('Text');
+    const [currentTitle, setTitle] = useState(title);
+    const [currentText, setText] = useState(text);
 
     const [changedTitle, setChangedTitle] = useState('');
     const [changedText, setChangedText] = useState('');
@@ -17,18 +19,18 @@ const Card = () => {
     const editMode = () => {
         setChecked(false);
         setEdit(!isEdit);
-        setChangedTitle(title);
-        setChangedText(text);
+        setChangedTitle(currentTitle);
+        setChangedText(currentText);
     };
 
     const saveChanges = () => {
-        if (changedTitle === title) {
+        if (changedTitle === currentTitle) {
             setChangedTitle('');
         } else {
             setTitle(changedTitle);
             setChangedTitle('');
         }
-        if (changedText === text) {
+        if (changedText === currentText) {
             setChangedText('');
         } else {
             setText(changedText);
@@ -47,10 +49,10 @@ const Card = () => {
             style={{ backgroundColor: isChecked ? '#5E4BD8' : '#2C17B1' }}
             className="card"
         >
-            {!isEdit ? (
-                <>
-                    <div className="cardHeader">
-                        <h4 className="cardTitle">{title}</h4>
+            <div className="cardHeader">
+                {!isEdit ? (
+                    <>
+                        <h4 className="cardTitle">{currentTitle}</h4>
                         <div className="buttons">
                             <button className="btnEdit" onClick={editMode}>
                                 <FiEdit2 />
@@ -62,20 +64,12 @@ const Card = () => {
                                 onChange={switchColor}
                             />
                         </div>
-                    </div>
-
-                    <hr className="cardLine" />
-
-                    <div className="cardBody">
-                        <p className="cardText">{text}</p>
-                    </div>
-                </>
-            ) : (
-                <>
-                    <div className="cardHeader">
+                    </>
+                ) : (
+                    <>
                         <h4>
                             <input
-                                defaultValue={title}
+                                defaultValue={currentTitle}
                                 className="inputTitle"
                                 type="text"
                                 value={changedTitle}
@@ -95,23 +89,31 @@ const Card = () => {
                                 <FiXCircle />
                             </button>
                         </div>
-                    </div>
+                    </>
+                )}
+            </div>
 
-                    <hr className="cardLine" />
+            <hr className="cardLine" />
 
-                    <div className="cardBody">
-                        <textarea
-                            defaultValue={text}
-                            className="inputText"
-                            type="text"
-                            value={changedText}
-                            onChange={event =>
-                                setChangedText(event.target.value)
-                            }
-                        />
-                    </div>
-                </>
-            )}
+            <div className="cardBody">
+                {!isEdit ? (
+                    <p className="cardText">{currentText}</p>
+                ) : (
+                    <>
+                        <div className="cardBody">
+                            <textarea
+                                defaultValue={currentText}
+                                className="inputText"
+                                type="text"
+                                value={changedText}
+                                onChange={event =>
+                                    setChangedText(event.target.value)
+                                }
+                            />
+                        </div>
+                    </>
+                )}
+            </div>
         </div>
     );
 };
