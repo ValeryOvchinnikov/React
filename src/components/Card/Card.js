@@ -8,40 +8,30 @@ const Card = props => {
     const [isEdit, setEdit] = useState(false);
     const [isChecked, setChecked] = useState(false);
 
-    const [currentTitle, setTitle] = useState(title);
-    const [currentText, setText] = useState(text);
+    const [currentTitle, setCurrentTitle] = useState(title);
+    const [currentText, setCurrentText] = useState(text);
 
-    const [changedTitle, setChangedTitle] = useState('');
-    const [changedText, setChangedText] = useState('');
+    const [changedTitle, setChangedTitle] = useState(title);
+    const [changedText, setChangedText] = useState(text);
 
     const switchColor = () => setChecked(!isChecked);
 
     const editMode = () => {
+        if (isEdit) {
+            setChangedTitle(null);
+            setChangedText(null);
+        } else {
+            setChangedTitle(currentTitle);
+            setChangedText(currentText);
+        }
         setChecked(false);
         setEdit(!isEdit);
-        setChangedTitle(currentTitle);
-        setChangedText(currentText);
     };
 
     const saveChanges = () => {
-        if (changedTitle === currentTitle) {
-            setChangedTitle('');
-        } else {
-            setTitle(changedTitle);
-            setChangedTitle('');
-        }
-        if (changedText === currentText) {
-            setChangedText('');
-        } else {
-            setText(changedText);
-            setChangedText('');
-        }
-        setEdit(!isEdit);
-    };
-    const cancelChanges = () => {
-        setChangedTitle('');
-        setChangedText('');
-        setEdit(!isEdit);
+        setCurrentTitle(changedTitle);
+        setCurrentText(changedText);
+        editMode();
     };
 
     return (
@@ -52,7 +42,9 @@ const Card = props => {
             <div className="cardHeader">
                 {!isEdit ? (
                     <>
-                        <h4 className="cardTitle">{currentTitle}</h4>
+                        <h4 classN ame="cardTitle">
+                            {currentTitle}
+                        </h4>
                         <div className="buttons">
                             <button className="btnEdit" onClick={editMode}>
                                 <FiEdit2 />
@@ -72,7 +64,6 @@ const Card = props => {
                                 defaultValue={currentTitle}
                                 className="inputTitle"
                                 type="text"
-                                value={changedTitle}
                                 onChange={event =>
                                     setChangedTitle(event.target.value)
                                 }
@@ -82,10 +73,7 @@ const Card = props => {
                             <button className="btnSave" onClick={saveChanges}>
                                 <FiSave />
                             </button>
-                            <button
-                                className="btnCancel"
-                                onClick={cancelChanges}
-                            >
+                            <button className="btnCancel" onClick={editMode}>
                                 <FiXCircle />
                             </button>
                         </div>
@@ -105,7 +93,6 @@ const Card = props => {
                                 defaultValue={currentText}
                                 className="inputText"
                                 type="text"
-                                value={changedText}
                                 onChange={event =>
                                     setChangedText(event.target.value)
                                 }

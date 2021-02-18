@@ -30,6 +30,7 @@
 .btnEdit,
 .btnSave,
 .btnCancel {
+    
     padding: 2px;
     background-color: inherit;
     border: none;
