@@ -1,105 +1,82 @@
 .card {
-    border: none;
     box-shadow: 1px 1px 20px 0 #3a2e85;
     color: #ffffff;
-    width: 200px;
-    position: relative;
-    height: 100%;
-    vertical-align: middle;
-    overflow: hidden;
+    width: 220px;
 }
 
 .cardHeader {
-    height: 100%;
     display: flex;
     font-size: 20px;
     justify-content: space-between;
     letter-spacing: 0.5px;
+    align-items: center;
+}
+
+.cardHeader h4 {
+    min-height: 26px;
+    max-width: 135px;
+    margin: 5px;
+    
 }
 
 .buttons {
-    margin-top: 5px;
-    margin-right: 4px;
-    display: inline-flex;
-    flex-direction: row-reverse;
-    align-items: flex-end;
-    justify-content: space-evenly;
+    width: 60px;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
 }
 
 .checkbox,
 .btnEdit,
 .btnSave,
 .btnCancel {
-    
-    padding: 2px;
+    height: 13.3125px;
+    width: 13.3125px;
+    padding: 0;
     background-color: inherit;
     border: none;
     color: white;
     outline: none;
-    align-self: baseline;
-    flex-shrink: 1;
-    transform: scale(1.4);
+    transform: scale(1.6);
 }
 
-.cardHeader h4 {
-    
-    margin: 5px;
-    
-}
 .inputTitle {
     margin-left:2px;
     width: 80%;
     height: 20px;
     background-color: white;
-    color: black;
     font: inherit;
     letter-spacing: inherit;
-    border-color: 3px solid #5e4bd8;
     border-radius: 6px;
 }
 
 .cardTitle {
     word-wrap: break-word;
-    margin-left:11px;
-
     max-width: 153px;
-    height: 100%;
-
-    bottom: 5px;
     padding-left: 6px;
 }
+
 .cardLine {
     background-color: white;
     width: 95%;
     height: 1px;
     margin: auto;
 }
-.cardBody {
-    position: relative;
-    font-size: 16px;
 
-    width: 100%;
-    height: 100%;
+.cardBody {
+    overflow: hidden;
 }
+
 .cardText {
     margin: 9px;
-    width: 93%;
-    box-sizing: border-box;
-
     word-wrap: break-word;
 }
 
 .inputText {
     box-sizing: border-box;
     margin: 7px;
-
-
-    padding-left: 2px;
     border: none;
-    text-align: left;
     font: inherit;
-    letter-spacing: inherit;
     resize: none;
-    width: 93%;
-    height: 100%;
+    width: 206px;
 }

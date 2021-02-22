@@ -17,21 +17,27 @@ const Card = props => {
     const switchColor = () => setChecked(!isChecked);
 
     const editMode = () => {
-        if (isEdit) {
-            setChangedTitle(null);
-            setChangedText(null);
-        } else {
-            setChangedTitle(currentTitle);
-            setChangedText(currentText);
-        }
+        setChangedTitle(currentTitle);
+        setChangedText(currentText);
+
         setChecked(false);
         setEdit(!isEdit);
+    };
+    const setNulluble = () => {
+        setChangedTitle(null);
+        setChangedText(null);
     };
 
     const saveChanges = () => {
         setCurrentTitle(changedTitle);
         setCurrentText(changedText);
-        editMode();
+        setNulluble();
+        setEdit(!isEdit);
+    };
+
+    const cancel = () => {
+        setNulluble();
+        setEdit(!isEdit);
     };
 
     return (
@@ -71,7 +77,7 @@ const Card = props => {
                             <button className="btnSave" onClick={saveChanges}>
                                 <FiSave />
                             </button>
-                            <button className="btnCancel" onClick={editMode}>
+                            <button className="btnCancel" onClick={cancel}>
                                 <FiXCircle />
                             </button>
                         </div>
@@ -85,18 +91,12 @@ const Card = props => {
                 {!isEdit ? (
                     <p className="cardText">{currentText}</p>
                 ) : (
-                    <>
-                        <div className="cardBody">
-                            <textarea
-                                defaultValue={currentText}
-                                className="inputText"
-                                type="text"
-                                onChange={event =>
-                                    setChangedText(event.target.value)
-                                }
-                            />
-                        </div>
-                    </>
+                    <textarea
+                        defaultValue={currentText}
+                        className="inputText"
+                        type="text"
+                        onChange={event => setChangedText(event.target.value)}
+                    />
                 )}
             </div>
         </div>
