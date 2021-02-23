@@ -16,13 +16,12 @@
     min-height: 26px;
     max-width: 135px;
     margin: 5px;
-    
 }
 
 .buttons {
     width: 60px;
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -41,7 +40,7 @@
 }
 
 .inputTitle {
-    margin-left:2px;
+    margin-left: 2px;
     width: 80%;
     height: 20px;
     background-color: white;

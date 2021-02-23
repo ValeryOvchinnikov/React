@@ -1,0 +1,7 @@
+.cards {
+    display: flex;
+    flex-flow: row wrap;
+}
+.card {
+    margin: 5px;
+}
