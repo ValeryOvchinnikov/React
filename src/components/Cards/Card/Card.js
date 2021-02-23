@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Card.css';
 import { FiEdit2, FiSave, FiXCircle } from 'react-icons/fi';
 
 const Card = props => {
-    const { title, text } = props;
+    const { title, text, readOnly } = props;
 
     const [isEdit, setEdit] = useState(false);
     const [isChecked, setChecked] = useState(false);
@@ -28,6 +28,11 @@ const Card = props => {
         setChangedText(null);
     };
 
+    const setReadOnlyMode = () => {
+        setChangedTitle(null);
+        setChangedText(null);
+        setEdit(false);
+    };
     const saveChanges = () => {
         setCurrentTitle(changedTitle);
         setCurrentText(changedText);
@@ -39,56 +44,71 @@ const Card = props => {
         setNulluble();
         setEdit(!isEdit);
     };
-
+    useEffect(() => {
+        readOnly ? setReadOnlyMode() : null;
+    }, [readOnly]);
     return (
         <div
             style={{ backgroundColor: isChecked ? '#5E4BD8' : '#2C17B1' }}
             className="card"
         >
             <div className="cardHeader">
+                {!isEdit || readOnly ? (
+                    <h4 className="cardTitle">{currentTitle}</h4>
+                ) : (
+                    <h4>
+                        <input
+                            defaultValue={currentTitle}
+                            className="inputTitle"
+                            type="text"
+                            onChange={event =>
+                                setChangedTitle(event.target.value)
+                            }
+                        />
+                    </h4>
+                )}
                 {!isEdit ? (
-                    <>
-                        <h4 className="cardTitle">{currentTitle}</h4>
-                        <div className="buttons">
+                    <div className="buttons">
+                        {!props.readOnly && (
                             <button className="btnEdit" onClick={editMode}>
                                 <FiEdit2 />
                             </button>
+                        )}
+                        <input
+                            type="checkbox"
+                            className="checkbox"
+                            checked={isChecked}
+                            onChange={switchColor}
+                        />
+                    </div>
+                ) : (
+                    <div className="buttons">
+                        {props.readOnly && (
                             <input
                                 type="checkbox"
                                 className="checkbox"
                                 checked={isChecked}
                                 onChange={switchColor}
                             />
-                        </div>
-                    </>
-                ) : (
-                    <>
-                        <h4>
-                            <input
-                                defaultValue={currentTitle}
-                                className="inputTitle"
-                                type="text"
-                                onChange={event =>
-                                    setChangedTitle(event.target.value)
-                                }
-                            />
-                        </h4>
-                        <div className="buttons">
+                        )}
+                        {!props.readOnly && (
                             <button className="btnSave" onClick={saveChanges}>
                                 <FiSave />
                             </button>
+                        )}
+                        {!props.readOnly && (
                             <button className="btnCancel" onClick={cancel}>
                                 <FiXCircle />
                             </button>
-                        </div>
-                    </>
+                        )}
+                    </div>
                 )}
             </div>
 
             <hr className="cardLine" />
 
             <div className="cardBody">
-                {!isEdit ? (
+                {!isEdit || props.readOnly ? (
                     <p className="cardText">{currentText}</p>
                 ) : (
                     <textarea
