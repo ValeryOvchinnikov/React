@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Card.css';
 import { FiEdit2, FiSave, FiXCircle } from 'react-icons/fi';
 
-const Card = props => {
-    const { title, text, readOnly } = props;
-
+const Card = ({ title, text, readOnly }) => {
     const [isEdit, setEdit] = useState(false);
     const [isChecked, setChecked] = useState(false);
 
@@ -69,7 +67,7 @@ const Card = props => {
                 )}
                 {!isEdit ? (
                     <div className="buttons">
-                        {!props.readOnly && (
+                        {!readOnly && (
                             <button className="btn-edit" onClick={editMode}>
                                 <FiEdit2 />
                             </button>
@@ -83,7 +81,7 @@ const Card = props => {
                     </div>
                 ) : (
                     <div className="buttons">
-                        {props.readOnly && (
+                        {readOnly && (
                             <input
                                 type="checkbox"
                                 className="checkbox"
@@ -91,12 +89,12 @@ const Card = props => {
                                 onChange={switchColor}
                             />
                         )}
-                        {!props.readOnly && (
+                        {!readOnly && (
                             <button className="btn-save" onClick={saveChanges}>
                                 <FiSave />
                             </button>
                         )}
-                        {!props.readOnly && (
+                        {!readOnly && (
                             <button className="btn-cancel" onClick={cancel}>
                                 <FiXCircle />
                             </button>
@@ -108,7 +106,7 @@ const Card = props => {
             <hr className="card-line" />
 
             <div className="card-body">
-                {!isEdit || props.readOnly ? (
+                {!isEdit || readOnly ? (
                     <p className="card-text">{currentText}</p>
                 ) : (
                     <textarea
