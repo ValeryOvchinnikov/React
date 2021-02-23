@@ -52,14 +52,14 @@ const Card = props => {
             style={{ backgroundColor: isChecked ? '#5E4BD8' : '#2C17B1' }}
             className="card"
         >
-            <div className="cardHeader">
+            <div className="card-header">
                 {!isEdit || readOnly ? (
-                    <h4 className="cardTitle">{currentTitle}</h4>
+                    <h4 className="card-title">{currentTitle}</h4>
                 ) : (
                     <h4>
                         <input
                             defaultValue={currentTitle}
-                            className="inputTitle"
+                            className="input-title"
                             type="text"
                             onChange={event =>
                                 setChangedTitle(event.target.value)
@@ -70,7 +70,7 @@ const Card = props => {
                 {!isEdit ? (
                     <div className="buttons">
                         {!props.readOnly && (
-                            <button className="btnEdit" onClick={editMode}>
+                            <button className="btn-edit" onClick={editMode}>
                                 <FiEdit2 />
                             </button>
                         )}
@@ -92,12 +92,12 @@ const Card = props => {
                             />
                         )}
                         {!props.readOnly && (
-                            <button className="btnSave" onClick={saveChanges}>
+                            <button className="btn-save" onClick={saveChanges}>
                                 <FiSave />
                             </button>
                         )}
                         {!props.readOnly && (
-                            <button className="btnCancel" onClick={cancel}>
+                            <button className="btn-cancel" onClick={cancel}>
                                 <FiXCircle />
                             </button>
                         )}
@@ -105,15 +105,15 @@ const Card = props => {
                 )}
             </div>
 
-            <hr className="cardLine" />
+            <hr className="card-line" />
 
-            <div className="cardBody">
+            <div className="card-body">
                 {!isEdit || props.readOnly ? (
-                    <p className="cardText">{currentText}</p>
+                    <p className="card-text">{currentText}</p>
                 ) : (
                     <textarea
                         defaultValue={currentText}
-                        className="inputText"
+                        className="input-text"
                         type="text"
                         onChange={event => setChangedText(event.target.value)}
                     />

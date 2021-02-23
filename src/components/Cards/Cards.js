@@ -15,12 +15,12 @@ class Cards extends Component {
         return (
             <>
                 <input
-                    id="readOnly"
+                    id="read-only"
                     type="checkbox"
                     onChange={this.switchReadOnly}
                     checked={this.state.readOnly}
                 />
-                <label htmlFor="readOnly">Read only</label>
+                <label htmlFor="read-only">Read only</label>
                 <div className="cards">
                     {this.props.cards.map(card => (
                         <Card
