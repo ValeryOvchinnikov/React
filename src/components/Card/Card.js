@@ -1,24 +1,104 @@
 import React, { useState } from 'react';
 import './Card.css';
+import { FiEdit2, FiSave, FiXCircle } from 'react-icons/fi';
 
 const Card = props => {
+    const { title, text } = props;
+
+    const [isEdit, setEdit] = useState(false);
     const [isChecked, setChecked] = useState(false);
+
+    const [currentTitle, setCurrentTitle] = useState(title);
+    const [currentText, setCurrentText] = useState(text);
+
+    const [changedTitle, setChangedTitle] = useState(title);
+    const [changedText, setChangedText] = useState(text);
+
     const switchColor = () => setChecked(!isChecked);
+
+    const editMode = () => {
+        setChangedTitle(currentTitle);
+        setChangedText(currentText);
+
+        setChecked(false);
+        setEdit(!isEdit);
+    };
+    const setNulluble = () => {
+        setChangedTitle(null);
+        setChangedText(null);
+    };
+
+    const saveChanges = () => {
+        setCurrentTitle(changedTitle);
+        setCurrentText(changedText);
+        setNulluble();
+        setEdit(!isEdit);
+    };
+
+    const cancel = () => {
+        setNulluble();
+        setEdit(!isEdit);
+    };
+
     return (
         <div
             style={{ backgroundColor: isChecked ? '#5E4BD8' : '#2C17B1' }}
             className="card"
         >
-            <>
-                <h4 className="cardTitle">{props.title}</h4>
-                <input
-                    className="cardInput"
-                    type="checkbox"
-                    onClick={switchColor}
-                />
-            </>
+            <div className="cardHeader">
+                {!isEdit ? (
+                    <>
+                        <h4 className="cardTitle">{currentTitle}</h4>
+                        <div className="buttons">
+                            <button className="btnEdit" onClick={editMode}>
+                                <FiEdit2 />
+                            </button>
+                            <input
+                                type="checkbox"
+                                className="checkbox"
+                                checked={isChecked}
+                                onChange={switchColor}
+                            />
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <h4>
+                            <input
+                                defaultValue={currentTitle}
+                                className="inputTitle"
+                                type="text"
+                                onChange={event =>
+                                    setChangedTitle(event.target.value)
+                                }
+                            />
+                        </h4>
+                        <div className="buttons">
+                            <button className="btnSave" onClick={saveChanges}>
+                                <FiSave />
+                            </button>
+                            <button className="btnCancel" onClick={cancel}>
+                                <FiXCircle />
+                            </button>
+                        </div>
+                    </>
+                )}
+            </div>
+
             <hr className="cardLine" />
-            <p>{props.text}</p>
+
+            <div className="cardBody">
+                {!isEdit ? (
+                    <p className="cardText">{currentText}</p>
+                ) : (
+                    <textarea
+                        defaultValue={currentText}
+                        className="inputText"
+                        type="text"
+                        onChange={event => setChangedText(event.target.value)}
+                    />
+                )}
+            </div>
         </div>
     );
 };
