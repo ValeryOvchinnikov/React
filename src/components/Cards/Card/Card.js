@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Card.css';
 import { FiEdit2, FiSave, FiXCircle } from 'react-icons/fi';
 
-const Card = props => {
-    const { title, text } = props;
-
+const Card = ({ title, text, readOnly }) => {
     const [isEdit, setEdit] = useState(false);
     const [isChecked, setChecked] = useState(false);
 
@@ -23,9 +21,16 @@ const Card = props => {
         setChecked(false);
         setEdit(!isEdit);
     };
+
     const setNulluble = () => {
         setChangedTitle(null);
         setChangedText(null);
+    };
+
+    const setReadOnlyMode = () => {
+        setChangedTitle(null);
+        setChangedText(null);
+        setEdit(false);
     };
 
     const saveChanges = () => {
@@ -40,19 +45,26 @@ const Card = props => {
         setEdit(!isEdit);
     };
 
+    useEffect(() => {
+        readOnly ? setReadOnlyMode() : null;
+    }, [readOnly]);
+
     return (
         <div
             style={{ backgroundColor: isChecked ? '#5E4BD8' : '#2C17B1' }}
             className="card"
         >
-            <div className="cardHeader">
-                {!isEdit ? (
-                    <>
-                        <h4 className="cardTitle">{currentTitle}</h4>
+            {!isEdit ? (
+                <>
+                    <div className="card-header">
+                        <h4 className="card-title">{currentTitle}</h4>
                         <div className="buttons">
-                            <button className="btnEdit" onClick={editMode}>
-                                <FiEdit2 />
-                            </button>
+                            {!readOnly && (
+                                <button className="btn-edit" onClick={editMode}>
+                                    <FiEdit2 />
+                                </button>
+                            )}
+
                             <input
                                 type="checkbox"
                                 className="checkbox"
@@ -60,45 +72,50 @@ const Card = props => {
                                 onChange={switchColor}
                             />
                         </div>
-                    </>
-                ) : (
-                    <>
+                    </div>
+
+                    <hr className="card-line" />
+
+                    <div className="card-body">
+                        <p className="card-text">{currentText}</p>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <div className="card-header">
                         <h4>
                             <input
                                 defaultValue={currentTitle}
-                                className="inputTitle"
+                                className="input-title"
                                 type="text"
                                 onChange={event =>
                                     setChangedTitle(event.target.value)
                                 }
                             />
                         </h4>
+
                         <div className="buttons">
-                            <button className="btnSave" onClick={saveChanges}>
+                            <button className="btn-save" onClick={saveChanges}>
                                 <FiSave />
                             </button>
-                            <button className="btnCancel" onClick={cancel}>
+                            <button className="btn-cancel" onClick={cancel}>
                                 <FiXCircle />
                             </button>
                         </div>
-                    </>
-                )}
-            </div>
+                    </div>
 
-            <hr className="cardLine" />
+                    <hr className="card-line" />
 
-            <div className="cardBody">
-                {!isEdit ? (
-                    <p className="cardText">{currentText}</p>
-                ) : (
-                    <textarea
-                        defaultValue={currentText}
-                        className="inputText"
-                        type="text"
-                        onChange={event => setChangedText(event.target.value)}
-                    />
-                )}
-            </div>
+                    <div className="card-body">
+                        <textarea
+                            defaultValue={currentText}
+                            className="input-text"
+                            type="text"
+                            onChange={event => setChangedText(event.target.value)}
+                        />
+                    </div>
+                </>
+            )}
         </div>
     );
 };

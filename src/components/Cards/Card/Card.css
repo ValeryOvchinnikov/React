@@ -4,7 +4,7 @@
     width: 220px;
 }
 
-.cardHeader {
+.card-header {
     display: flex;
     font-size: 20px;
     justify-content: space-between;
@@ -12,24 +12,23 @@
     align-items: center;
 }
 
-.cardHeader h4 {
+.card-header h4 {
     min-height: 26px;
     max-width: 135px;
     margin: 5px;
-    
 }
 
 .buttons {
     width: 60px;
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
     align-items: center;
 }
 
 .checkbox,
-.btnEdit,
-.btnSave,
-.btnCancel {
+.btn-edit,
+.btn-save,
+.btn-cancel {
     height: 13.3125px;
     width: 13.3125px;
     padding: 0;
@@ -40,8 +39,8 @@
     transform: scale(1.6);
 }
 
-.inputTitle {
-    margin-left:2px;
+.input-title {
+    margin-left: 2px;
     width: 80%;
     height: 20px;
     background-color: white;
@@ -50,29 +49,29 @@
     border-radius: 6px;
 }
 
-.cardTitle {
+.card-title {
     word-wrap: break-word;
     max-width: 153px;
     padding-left: 6px;
 }
 
-.cardLine {
+.card-line {
     background-color: white;
     width: 95%;
     height: 1px;
     margin: auto;
 }
 
-.cardBody {
+.card-body {
     overflow: hidden;
 }
 
-.cardText {
+.card-text {
     margin: 9px;
     word-wrap: break-word;
 }
 
-.inputText {
+.input-text {
     box-sizing: border-box;
     margin: 7px;
     border: none;
