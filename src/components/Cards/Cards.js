@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Card from './Card';
 import './Cards.css';
-
 class Cards extends Component {
     state = {
         readOnly: false,
@@ -12,6 +11,7 @@ class Cards extends Component {
             readOnly: !this.state.readOnly,
         });
     };
+
     render() {
         return (
             <>
