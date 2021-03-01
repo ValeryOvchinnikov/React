@@ -45,77 +45,68 @@ const Card = ({ title, text, readOnly }) => {
     useEffect(() => {
         readOnly ? setReadOnlyMode() : null;
     }, [readOnly]);
-    return (
+
+    return !isEdit ? (
         <div
             style={{ backgroundColor: isChecked ? '#5E4BD8' : '#2C17B1' }}
             className="card"
         >
             <div className="card-header">
-                {!isEdit || readOnly ? (
-                    <h4 className="card-title">{currentTitle}</h4>
-                ) : (
-                    <h4>
-                        <input
-                            defaultValue={currentTitle}
-                            className="input-title"
-                            type="text"
-                            onChange={event =>
-                                setChangedTitle(event.target.value)
-                            }
-                        />
-                    </h4>
-                )}
-                {!isEdit ? (
-                    <div className="buttons">
-                        {!readOnly && (
-                            <button className="btn-edit" onClick={editMode}>
-                                <FiEdit2 />
-                            </button>
-                        )}
-                        <input
-                            type="checkbox"
-                            className="checkbox"
-                            checked={isChecked}
-                            onChange={switchColor}
-                        />
-                    </div>
-                ) : (
-                    <div className="buttons">
-                        {readOnly && (
-                            <input
-                                type="checkbox"
-                                className="checkbox"
-                                checked={isChecked}
-                                onChange={switchColor}
-                            />
-                        )}
-                        {!readOnly && (
-                            <button className="btn-save" onClick={saveChanges}>
-                                <FiSave />
-                            </button>
-                        )}
-                        {!readOnly && (
-                            <button className="btn-cancel" onClick={cancel}>
-                                <FiXCircle />
-                            </button>
-                        )}
-                    </div>
-                )}
+                <h4 className="card-title">{currentTitle}</h4>
+                <div className="buttons">
+                    {!readOnly && (
+                        <button className="btn-edit" onClick={editMode}>
+                            <FiEdit2 />
+                        </button>
+                    )}
+
+                    <input
+                        type="checkbox"
+                        className="checkbox"
+                        checked={isChecked}
+                        onChange={switchColor}
+                    />
+                </div>
+            </div>
+
+            <hr className="card-line" />
+            <div className="card-body">
+                <p className="card-text">{currentText}</p>
+            </div>
+        </div>
+    ) : (
+        <div
+            style={{ backgroundColor: isChecked ? '#5E4BD8' : '#2C17B1' }}
+            className="card"
+        >
+            <div className="card-header">
+                <h4>
+                    <input
+                        defaultValue={currentTitle}
+                        className="input-title"
+                        type="text"
+                        onChange={event => setChangedTitle(event.target.value)}
+                    />
+                </h4>
+                <div className="buttons">
+                    <button className="btn-save" onClick={saveChanges}>
+                        <FiSave />
+                    </button>
+                    <button className="btn-cancel" onClick={cancel}>
+                        <FiXCircle />
+                    </button>
+                </div>
             </div>
 
             <hr className="card-line" />
 
             <div className="card-body">
-                {!isEdit || readOnly ? (
-                    <p className="card-text">{currentText}</p>
-                ) : (
-                    <textarea
-                        defaultValue={currentText}
-                        className="input-text"
-                        type="text"
-                        onChange={event => setChangedText(event.target.value)}
-                    />
-                )}
+                <textarea
+                    defaultValue={currentText}
+                    className="input-text"
+                    type="text"
+                    onChange={event => setChangedText(event.target.value)}
+                />
             </div>
         </div>
     );

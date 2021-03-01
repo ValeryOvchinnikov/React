@@ -4,5 +4,8 @@
     "trailingComma": "all",
     "semi": true,
     "jsxBracketSameLine": false,
-    "arrowParens": "avoid"
+    "arrowParens": "avoid",
+    "endOfLine": "auto",
+    "printWidth": 85,
+    "useTabs": false
 }
