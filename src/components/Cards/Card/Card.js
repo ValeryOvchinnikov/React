@@ -22,7 +22,7 @@ const Card = ({ title, text, readOnly }) => {
         setEdit(!isEdit);
     };
 
-    const setNulluble = () => {
+    const setNull = () => {
         setChangedTitle(null);
         setChangedText(null);
     };
@@ -32,16 +32,15 @@ const Card = ({ title, text, readOnly }) => {
         setChangedText(null);
         setEdit(false);
     };
-
     const saveChanges = () => {
         setCurrentTitle(changedTitle);
         setCurrentText(changedText);
-        setNulluble();
+        setNull();
         setEdit(!isEdit);
     };
 
     const cancel = () => {
-        setNulluble();
+        setNull();
         setEdit(!isEdit);
     };
 
@@ -51,7 +50,7 @@ const Card = ({ title, text, readOnly }) => {
 
     return (
         <div
-            style={{ backgroundColor: isChecked ? '#5E4BD8' : '#2C17B1' }}
+            style={{ backgroundColor: isChecked ? '#5E4BD8' : '#2c17b1' }}
             className="card"
         >
             {!isEdit ? (
@@ -60,7 +59,11 @@ const Card = ({ title, text, readOnly }) => {
                         <h4 className="card-title">{currentTitle}</h4>
                         <div className="buttons">
                             {!readOnly && (
-                                <button className="btn-edit" onClick={editMode}>
+                                <button
+                                    type="button"
+                                    className="btn-edit"
+                                    onClick={editMode}
+                                >
                                     <FiEdit2 />
                                 </button>
                             )}
@@ -95,10 +98,18 @@ const Card = ({ title, text, readOnly }) => {
                         </h4>
 
                         <div className="buttons">
-                            <button className="btn-save" onClick={saveChanges}>
+                            <button
+                                type="submit"
+                                className="btn-save"
+                                onClick={saveChanges}
+                            >
                                 <FiSave />
                             </button>
-                            <button className="btn-cancel" onClick={cancel}>
+                            <button
+                                type="button"
+                                className="btn-cancel"
+                                onClick={cancel}
+                            >
                                 <FiXCircle />
                             </button>
                         </div>
@@ -110,7 +121,6 @@ const Card = ({ title, text, readOnly }) => {
                         <textarea
                             defaultValue={currentText}
                             className="input-text"
-                            type="text"
                             onChange={event => setChangedText(event.target.value)}
                         />
                     </div>

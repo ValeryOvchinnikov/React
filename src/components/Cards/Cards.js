@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import Card from './Card';
 import './Cards.css';
+
+const StyledCheckbox = styled.input`
+    transform: ${props => (props.checked ? 'scale(1)' : 'scale(2)')};
+    margin: 9px;
+    }
+`;
+
 class Cards extends Component {
-    state = {
-        readOnly: false,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            readOnly: false,
+        };
+    }
 
     switchReadOnly = () => {
         this.setState({
@@ -15,13 +26,14 @@ class Cards extends Component {
     render() {
         return (
             <>
-                <input
+                <StyledCheckbox
                     id="read-only"
                     type="checkbox"
-                    onChange={this.switchReadOnly}
                     checked={this.state.readOnly}
+                    onChange={this.switchReadOnly}
                 />
-                <label htmlFor="read-only">Read only</label>
+                <label htmlFor="read-only">Read-Only</label>
+
                 <div className="cards">
                     {this.props.cards.map(card => (
                         <Card

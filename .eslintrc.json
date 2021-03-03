@@ -1,13 +1,12 @@
 {
     "env": {
         "browser": true,
-        "es2021": true,
-        "jest": true
+        "es6": true,
+        "jest": true,
+        "node": true
     },
     "extends": [
-        "plugin:import/errors",
-        "plugin:import/warnings",
-        "plugin:jsx-a11y/recommended",
+        "airbnb",
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:prettier/recommended",
@@ -18,17 +17,13 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 12,
+        "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": ["react","jsx-a11y","prettier"],
+    "plugins": ["react", "prettier"],
     "rules": {
-        "react/react-in-jsx-scope": "off",
-        "react/prop-types": "off",
-        "arrow-parens": ["error", "as-needed"],
-        "prettier/prettier": "error",
-        "arrow-body-style": "off",
-        "prefer-arrow-callback": "off",
+        "react/prop-types":1,
+        "react/no-access-state-in-setstate": 1,
         "complexity": ["error", 10],
         "quotes": ["error", "single"],
         "react/destructuring-assignment": [1, "always", { "ignoreClassFields": true }],
@@ -41,7 +36,7 @@
         "jsx-a11y/label-has-associated-control": 0,
         "react/jsx-props-no-spreading": 0,
         "react/jsx-curly-newline": 0,
-        "linebreak-style": 1,
+        "linebreak-style": 0,
         "react/forbid-prop-types": 0,
         "no-unused-expressions": 0,
         "import/no-named-as-default": 0,
