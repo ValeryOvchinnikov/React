@@ -5,7 +5,6 @@ import './Cards.css';
 
 const StyledCheckbox = styled.input`
     transform: ${props => (props.checked ? 'scale(1)' : 'scale(2)')};
-
     margin: 9px;
     }
 `;
