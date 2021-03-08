@@ -1,133 +1,105 @@
-import React, { useState, useEffect } from 'react';
+import React, { PureComponent } from 'react';
 import './Card.css';
-import { FiEdit2, FiSave, FiXCircle } from 'react-icons/fi';
+import CardHeader from './CardHeader';
+import CardBody from './CardBody';
 
-const Card = ({ title, text, readOnly }) => {
-    const [isEdit, setEdit] = useState(false);
-    const [isChecked, setChecked] = useState(false);
+export default class Card extends PureComponent {
+    constructor(props) {
+        super(props);
 
-    const [currentTitle, setCurrentTitle] = useState(title);
-    const [currentText, setCurrentText] = useState(text);
+        this.state = {
+            isEditMode: false,
+            isAltStyle: false,
+            title: this.props.title,
+            text: this.props.text,
+            changedTitle: '',
+            changedText: '',
+        };
+        this.switchColor = this.switchColor.bind(this);
+        this.switchEditMode = this.switchEditMode.bind(this);
+        this.changedTitleHandler = this.changedTitleHandler.bind(this);
+        this.changedTextHandler = this.changedTextHandler.bind(this);
+        this.saveChanges = this.saveChanges.bind(this);
+        this.setNull = this.setNull.bind(this);
+        this.cancelChanges = this.cancelChanges.bind(this);
+    }
 
-    const [changedTitle, setChangedTitle] = useState(title);
-    const [changedText, setChangedText] = useState(text);
-
-    const switchColor = () => setChecked(!isChecked);
-
-    const editMode = () => {
-        setChangedTitle(currentTitle);
-        setChangedText(currentText);
-
-        setChecked(false);
-        setEdit(!isEdit);
+    switchColor = () => {
+        this.setState(prevState => ({ isAltStyle: !prevState.isAltStyle }));
     };
 
-    const setNull = () => {
-        setChangedTitle(null);
-        setChangedText(null);
+    switchEditMode = () => {
+        const { text, title, isAltStyle } = this.state;
+        isAltStyle ? this.switchColor() : null;
+        this.setState({ changedTitle: title });
+        this.setState({ changedText: text });
+
+        this.setState(prevState => ({ isEditMode: !prevState.isEditMode }));
+        this.setNull();
     };
 
-    const setReadOnlyMode = () => {
-        setChangedTitle(null);
-        setChangedText(null);
-        setEdit(false);
-    };
-    const saveChanges = () => {
-        setCurrentTitle(changedTitle);
-        setCurrentText(changedText);
-        setNull();
-        setEdit(!isEdit);
+    changedTitleHandler = event => {
+        this.setState({ changedTitle: event.target.value });
     };
 
-    const cancel = () => {
-        setNull();
-        setEdit(!isEdit);
+    changedTextHandler = event => {
+        this.setState({ changedText: event.target.value });
     };
 
-    useEffect(() => {
-        readOnly ? setReadOnlyMode() : null;
-    }, [readOnly]);
+    saveChanges = () => {
+        const { changedText, changedTitle } = this.state;
+        this.setState({
+            title: changedTitle,
+            text: changedText,
+        });
+        this.switchEditMode();
+    };
 
-    return (
-        <div
-            style={{ backgroundColor: isChecked ? '#5E4BD8' : '#2c17b1' }}
-            className="card"
-        >
-            {!isEdit ? (
-                <>
-                    <div className="card-header">
-                        <h4 className="card-title">{currentTitle}</h4>
-                        <div className="buttons">
-                            {!readOnly && (
-                                <button
-                                    type="button"
-                                    className="btn-edit"
-                                    onClick={editMode}
-                                >
-                                    <FiEdit2 />
-                                </button>
-                            )}
+    cancelChanges = () => {
+        this.switchEditMode();
+    };
 
-                            <input
-                                type="checkbox"
-                                className="checkbox"
-                                checked={isChecked}
-                                onChange={switchColor}
-                            />
-                        </div>
-                    </div>
+    componentDidUpdate = () => {
+        const { isReadOnly } = this.props;
+        const { isEditMode } = this.state;
+        isReadOnly && isEditMode ? this.cancelChanges() : true;
+    };
 
-                    <hr className="card-line" />
+    setNull = () => {
+        this.setState({
+            changedTitle: null,
+            changedText: null,
+        });
+    };
 
-                    <div className="card-body">
-                        <p className="card-text">{currentText}</p>
-                    </div>
-                </>
-            ) : (
-                <>
-                    <div className="card-header">
-                        <h4>
-                            <input
-                                defaultValue={currentTitle}
-                                className="input-title"
-                                type="text"
-                                onChange={event =>
-                                    setChangedTitle(event.target.value)
-                                }
-                            />
-                        </h4>
-
-                        <div className="buttons">
-                            <button
-                                type="submit"
-                                className="btn-save"
-                                onClick={saveChanges}
-                            >
-                                <FiSave />
-                            </button>
-                            <button
-                                type="button"
-                                className="btn-cancel"
-                                onClick={cancel}
-                            >
-                                <FiXCircle />
-                            </button>
-                        </div>
-                    </div>
-
-                    <hr className="card-line" />
-
-                    <div className="card-body">
-                        <textarea
-                            defaultValue={currentText}
-                            className="input-text"
-                            onChange={event => setChangedText(event.target.value)}
-                        />
-                    </div>
-                </>
-            )}
-        </div>
-    );
-};
-
-export default Card;
+    render() {
+        const { isAltStyle, title, isEditMode, text } = this.state;
+        const { isReadOnly } = this.props;
+        return (
+            <div
+                style={{
+                    backgroundColor: isAltStyle ? '#5E4BD8' : '#2c17b1',
+                }}
+                className="card"
+            >
+                <CardHeader
+                    title={title}
+                    isEditMode={isEditMode}
+                    isAltStyle={isAltStyle}
+                    isReadOnly={isReadOnly}
+                    onSave={this.saveChanges}
+                    onCancel={this.cancelChanges}
+                    onChange={this.changedTitleHandler}
+                    onSwitchEditMode={this.switchEditMode}
+                    onSwitchColor={this.switchColor}
+                />
+                <hr className="card-line" />
+                <CardBody
+                    text={text}
+                    onChange={this.changedTextHandler}
+                    isEditMode={isEditMode}
+                />
+            </div>
+        );
+    }
+}

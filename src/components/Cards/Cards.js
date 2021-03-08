@@ -9,27 +9,29 @@ const StyledCheckbox = styled.input`
     }
 `;
 
-class Cards extends Component {
+export default class Cards extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            readOnly: false,
+            isReadOnly: false,
         };
+        this.switchReadOnly = this.switchReadOnly.bind(this);
     }
 
     switchReadOnly = () => {
-        this.setState({
-            readOnly: !this.state.readOnly,
-        });
+        this.setState(prevState => ({
+            isReadOnly: !prevState.isReadOnly,
+        }));
     };
 
     render() {
+        const { isReadOnly } = this.state;
         return (
             <>
                 <StyledCheckbox
                     id="read-only"
                     type="checkbox"
-                    checked={this.state.readOnly}
+                    checked={isReadOnly}
                     onChange={this.switchReadOnly}
                 />
                 <label htmlFor="read-only">Read-Only</label>
@@ -41,7 +43,7 @@ class Cards extends Component {
                             title={card.title}
                             text={card.text}
                             key={card.id}
-                            readOnly={this.state.readOnly}
+                            isReadOnly={isReadOnly}
                         />
                     ))}
                 </div>
@@ -49,4 +51,3 @@ class Cards extends Component {
         );
     }
 }
-export default Cards;
