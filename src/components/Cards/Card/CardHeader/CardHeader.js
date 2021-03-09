@@ -7,12 +7,12 @@ export default class CardHeader extends PureComponent {
         const {
             isEditMode,
             isReadOnly,
-            isAltStyle,
+            isChecked,
             onSwitchEditMode,
-            onSwitchColor,
             onChange,
             onSave,
             onCancel,
+            onChecked,
             title,
         } = this.props;
         return (
@@ -34,8 +34,8 @@ export default class CardHeader extends PureComponent {
                             <input
                                 type="checkbox"
                                 className="checkbox"
-                                onChange={onSwitchColor}
-                                checked={isAltStyle}
+                                onChange={onChecked}
+                                checked={isChecked}
                             />
                         </div>
                     </>
