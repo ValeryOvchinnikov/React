@@ -47,8 +47,6 @@ export default class Cards extends Component {
     addOrDeleteIndex = item => {
         const index = indexToDelete.indexOf(item);
         index !== -1 ? indexToDelete.splice(index, 1) : indexToDelete.push(item);
-
-        console.log(`to delete ${indexToDelete}`);
     };
 
     switchReadOnly = () => {
@@ -65,7 +63,6 @@ export default class Cards extends Component {
             cards: newCards,
         });
         indexToDelete.length = 0;
-        console.log(`deleted ${newCards}`);
     };
 
     render() {
