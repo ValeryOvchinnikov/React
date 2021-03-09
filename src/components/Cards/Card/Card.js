@@ -29,13 +29,15 @@ export default class Card extends PureComponent {
     };
 
     switchEditMode = () => {
-        const { text, title, isAltStyle } = this.state;
+        const { text, title, isAltStyle, isEditMode } = this.state;
         isAltStyle ? this.switchColor() : null;
-        this.setState({ changedTitle: title });
-        this.setState({ changedText: text });
-
+        if (!isEditMode) {
+            this.setState({ changedTitle: title });
+            this.setState({ changedText: text });
+        } else {
+            this.setNull();
+        }
         this.setState(prevState => ({ isEditMode: !prevState.isEditMode }));
-        this.setNull();
     };
 
     changedTitleHandler = event => {
