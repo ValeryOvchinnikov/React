@@ -68,7 +68,7 @@ export default class Card extends Component {
 
   checkHandler = () => {
     this.props.checkedForDelete(this.props.id);
-    this.setState(prevState => ({ isChecked: !prevState.isChecked }));
+    this.switchColor();
   };
 
   render() {
