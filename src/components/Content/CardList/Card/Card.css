@@ -1,0 +1,13 @@
+.card {
+  box-shadow: 1px 1px 20px 0 #3a2e85;
+  color: #ffffff;
+  width: 220px;
+  min-height: 104px;
+}
+
+.card-line {
+  background-color: white;
+  width: 95%;
+  height: 1px;
+  margin: auto;
+}
