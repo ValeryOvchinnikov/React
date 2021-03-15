@@ -3,28 +3,29 @@ import { StyledDiv, StyledButton, StyledCheckbox } from './Controls';
 import CardList from './CardList';
 import './Content.css';
 
-const indexToDelete = [];
-
 export default class Content extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isReadOnly: false,
       cards: [
-        { id: 0, title: 'Card 1', text: 'text' },
-        { id: 1, title: 'Card 2', text: 'text' },
-        { id: 2, title: 'Card 3', text: 'text' },
-        { id: 3, title: 'Card 4', text: 'text' },
-        { id: 4, title: 'Card 5', text: 'text' },
-        { id: 5, title: 'Card 6', text: 'text' },
-        { id: 6, title: 'Card 7', text: 'text' },
+        { id: 0, title: 'Card 1', text: 'text', selected: false },
+        { id: 1, title: 'Card 2', text: 'text', selected: false },
+        { id: 2, title: 'Card 3', text: 'text', selected: false },
+        { id: 3, title: 'Card 4', text: 'text', selected: false },
+        { id: 4, title: 'Card 5', text: 'text', selected: false },
+        { id: 5, title: 'Card 6', text: 'text', selected: false },
+        { id: 6, title: 'Card 7', text: 'text', selected: false },
       ],
     };
   }
 
-  addOrDeleteIndex = item => {
-    const index = indexToDelete.indexOf(item);
-    index !== -1 ? indexToDelete.splice(index, 1) : indexToDelete.push(item);
+  selectCardHandler = item => {
+    const { cards } = this.state;
+    const newCards = [...cards];
+    const index = this.state.findIndex(card => card.id === item);
+    newCards[index].selected = !newCards[index].selected;
+    this.setState({ cards: newCards });
   };
 
   switchReadOnly = () => {
@@ -35,12 +36,10 @@ export default class Content extends Component {
 
   deleteHandler = () => {
     const { cards } = this.state;
-
-    const newCards = cards.filter(item => indexToDelete.indexOf(item.id) < 0);
+    const newCards = cards.filter(card => !card.selected);
     this.setState({
       cards: newCards,
     });
-    indexToDelete.length = 0;
   };
 
   render() {
@@ -62,11 +61,13 @@ export default class Content extends Component {
           </StyledButton>
         </StyledDiv>
 
-        <CardList
-          isReadOnly={isReadOnly}
-          cards={cards}
-          checkedForDelete={this.addOrDeleteIndex}
-        />
+        <div className="card-list">
+          <CardList
+            isReadOnly={isReadOnly}
+            cards={cards}
+            checkedForDelete={this.selectCardHandler}
+          />
+        </div>
       </>
     );
   }

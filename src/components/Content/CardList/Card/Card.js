@@ -23,7 +23,7 @@ export default class Card extends Component {
 
   switchEditMode = () => {
     const { text, title, isChecked, isEditMode } = this.state;
-    isChecked ? this.switchColor() : null;
+    isChecked || this.switchColor();
     if (!isEditMode) {
       this.setState({ changedTitle: title, changedText: text });
     } else {
@@ -56,7 +56,10 @@ export default class Card extends Component {
   componentDidUpdate = () => {
     const { isReadOnly } = this.props;
     const { isEditMode } = this.state;
-    isReadOnly && isEditMode ? this.cancelChanges() : true;
+    if (isReadOnly && isEditMode) {
+      this.cancelChanges();
+    }
+    return true;
   };
 
   setNull = () => {
