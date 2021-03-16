@@ -20,10 +20,10 @@ export default class Content extends Component {
     };
   }
 
-  selectCardHandler = item => {
+  selectCardHandler = id => {
     const { cards } = this.state;
     const newCards = [...cards];
-    const index = this.state.findIndex(card => card.id === item);
+    const index = cards.findIndex(card => card.id === id);
     newCards[index].selected = !newCards[index].selected;
     this.setState({ cards: newCards });
   };
@@ -35,11 +35,9 @@ export default class Content extends Component {
   };
 
   deleteHandler = () => {
-    const { cards } = this.state;
-    const newCards = cards.filter(card => !card.selected);
-    this.setState({
-      cards: newCards,
-    });
+    this.setState(prevState => ({
+      cards: prevState.cards.filter(card => !card.selected),
+    }));
   };
 
   render() {
