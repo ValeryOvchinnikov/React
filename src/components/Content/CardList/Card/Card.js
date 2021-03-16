@@ -23,7 +23,7 @@ export default class Card extends Component {
 
   switchEditMode = () => {
     const { text, title, isChecked, isEditMode } = this.state;
-    isChecked || this.switchColor();
+    !isChecked || this.switchColor();
     if (!isEditMode) {
       this.setState({ changedTitle: title, changedText: text });
     } else {
