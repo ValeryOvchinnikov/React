@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { StyledDiv, StyledButton, StyledCheckbox } from './Controls';
 import CardList from './CardList';
 import './Content.css';
@@ -21,16 +22,32 @@ export default class Content extends Component {
   }
 
   selectCardHandler = id => {
-    const { cards } = this.state;
-    const newCards = [...cards];
-    const index = cards.findIndex(card => card.id === id);
-    newCards[index].selected = !newCards[index].selected;
-    this.setState({ cards: newCards });
+    this.setState(prevState => {
+      return {
+        cards: prevState.cards.map(item =>
+          item.id === id ? { ...item, selected: !item.selected } : item,
+        ),
+      };
+    });
   };
 
   switchReadOnly = () => {
     this.setState(prevState => ({
       isReadOnly: !prevState.isReadOnly,
+    }));
+  };
+
+  addCardHandler = () => {
+    this.setState(prevState => ({
+      cards: [
+        ...prevState.cards,
+        {
+          id: uuidv4(),
+          title: '',
+          text: '',
+          selected: false,
+        },
+      ],
     }));
   };
 
@@ -57,6 +74,7 @@ export default class Content extends Component {
           <StyledButton onClick={this.deleteHandler}>
             Delete selected cards
           </StyledButton>
+          <StyledButton onClick={this.addCardHandler}>Create new card</StyledButton>
         </StyledDiv>
 
         <div className="card-list">
