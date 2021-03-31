@@ -1,6 +1,7 @@
 import React from 'react';
 import './CardHeader.css';
 import { FiEdit2, FiSave, FiXCircle } from 'react-icons/fi';
+import PropTypes from 'prop-types';
 
 const CardHeader = props => {
   const {
@@ -58,4 +59,15 @@ const CardHeader = props => {
   );
 };
 
+CardHeader.propTypes = {
+  title: PropTypes.string,
+  isEditMode: PropTypes.bool.isRequired,
+  isChecked: PropTypes.bool.isRequired,
+  isReadOnly: PropTypes.bool.isRequired,
+  onSave: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onChecked: PropTypes.func.isRequired,
+  onSwitchEditMode: PropTypes.func.isRequired,
+};
 export default CardHeader;

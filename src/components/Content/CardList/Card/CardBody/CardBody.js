@@ -1,5 +1,6 @@
 import React from 'react';
 import './CardBody.css';
+import PropTypes from 'prop-types';
 
 const CardBody = props => {
   const { isEditMode, text, onChange } = props;
@@ -14,4 +15,9 @@ const CardBody = props => {
   );
 };
 
+CardBody.propTypes = {
+  onChange: PropTypes.func,
+  text: PropTypes.string,
+  isEditMode: PropTypes.bool,
+};
 export default CardBody;
