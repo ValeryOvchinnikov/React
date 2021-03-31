@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 const { Provider, Consumer } = React.createContext({
   cards: [],
@@ -11,20 +12,25 @@ const { Provider, Consumer } = React.createContext({
 });
 
 class CardsContextProvider extends Component {
+  url =
+    'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
+
   constructor(props) {
     super(props);
     this.state = {
       isReadOnly: false,
-      cards: [
-        { id: '0', title: 'Card 1', text: 'text', selected: false },
-        { id: '1', title: 'Card 2', text: 'text', selected: false },
-        { id: '2', title: 'Card 3', text: 'text', selected: false },
-        { id: '3', title: 'Card 4', text: 'text', selected: false },
-        { id: '4', title: 'Card 5', text: 'text', selected: false },
-        { id: '5', title: 'Card 6', text: 'text', selected: false },
-        { id: '6', title: 'Card 7', text: 'text', selected: false },
-      ],
+      cards: [],
     };
+  }
+
+  componentDidMount() {
+    axios.get(this.url).then(res => {
+      this.setState({
+        cards: res.data.slice(0, 15).map(pokemon => {
+          return { id: pokemon.Number, title: pokemon.Name, text: pokemon.About };
+        }),
+      });
+    });
   }
 
   switchReadOnly = () => {
@@ -64,7 +70,7 @@ class CardsContextProvider extends Component {
   };
 
   render() {
-    const { cards, isReadOnly } = this.state;
+    const { cards, isReadOnly, error } = this.state;
     const { children } = this.props;
     return (
       <Provider
@@ -76,6 +82,7 @@ class CardsContextProvider extends Component {
           deleteCardHandler: this.deleteCardHandler,
           addCardHandler: this.addCardHandler,
           switchReadOnly: this.switchReadOnly,
+          error,
         }}
       >
         {children}
