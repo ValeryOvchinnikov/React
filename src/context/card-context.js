@@ -70,7 +70,7 @@ class CardsContextProvider extends Component {
   };
 
   render() {
-    const { cards, isReadOnly, error } = this.state;
+    const { cards, isReadOnly } = this.state;
     const { children } = this.props;
     return (
       <Provider
@@ -82,7 +82,6 @@ class CardsContextProvider extends Component {
           deleteCardHandler: this.deleteCardHandler,
           addCardHandler: this.addCardHandler,
           switchReadOnly: this.switchReadOnly,
-          error,
         }}
       >
         {children}
