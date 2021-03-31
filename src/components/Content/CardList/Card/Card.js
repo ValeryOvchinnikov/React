@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Card.css';
+import PropTypes from 'prop-types';
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import withLoadingDelay from '../../../../hoc/withLoadingDelay';
@@ -7,12 +8,12 @@ import withLoadingDelay from '../../../../hoc/withLoadingDelay';
 class Card extends Component {
   constructor(props) {
     super(props);
-
+    const { title, text } = this.props;
     this.state = {
       isEditMode: false,
       isChecked: false,
-      title: this.props.title,
-      text: this.props.text,
+      title,
+      text,
       changedTitle: '',
       changedText: '',
     };
@@ -107,4 +108,11 @@ class Card extends Component {
     );
   }
 }
+Card.propTypes = {
+  isReadOnly: PropTypes.bool.isRequired,
+  id: PropTypes.string,
+  title: PropTypes.string,
+  text: PropTypes.string,
+  checkedForDelete: PropTypes.func.isRequired,
+};
 export default withLoadingDelay(Card);
