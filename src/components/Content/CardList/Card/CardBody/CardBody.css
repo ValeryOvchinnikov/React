@@ -1,50 +1,19 @@
-.card-header {
-  display: flex;
-  font-size: 20px;
-  justify-content: space-between;
-  letter-spacing: 0.5px;
-  align-items: center;
+.card-body {
+  overflow: hidden;
 }
 
-.card-header h4 {
-  min-height: 26px;
-  max-width: 135px;
-  margin: 5px;
-}
-
-.buttons {
-  width: 60px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.checkbox,
-.btn-edit,
-.btn-save,
-.btn-cancel {
-  height: 13.3125px;
-  width: 13.3125px;
-  padding: 0;
-  background-color: inherit;
-  border: none;
-  color: white;
-  outline: none;
-  transform: scale(1.6);
-}
-
-.input-title {
-  margin-left: 2px;
-  width: 80%;
-  height: 20px;
-  background-color: white;
-  font: inherit;
-  letter-spacing: inherit;
-  border-radius: 6px;
-}
-
-.card-title {
+.card-text {
+  margin: 9px;
   word-wrap: break-word;
-  max-width: 153px;
-  padding-left: 6px;
+}
+
+.input-text {
+  position: relative;
+  box-sizing: border-box;
+  margin: 7px;
+  border: none;
+  font: inherit;
+  resize: none;
+  width: 206px;
+  height: 8em;
 }
