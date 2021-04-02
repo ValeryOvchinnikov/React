@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 const CardBody = props => {
   const { isEditMode, text, onChange } = props;
+
   return (
     <div className="card-body">
       {!isEditMode ? (
@@ -20,4 +21,5 @@ CardBody.propTypes = {
   text: PropTypes.string,
   isEditMode: PropTypes.bool,
 };
-export default CardBody;
+
+export default React.memo(CardBody);

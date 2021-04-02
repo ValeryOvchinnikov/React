@@ -1,17 +1,16 @@
 import React from 'react';
 import { StyledDiv, StyledButton, StyledCheckbox } from './Controls';
-import { CardContextConsumer } from '../../context/card-context';
+import CardContext from '../../context/card-context';
 import CardList from './CardList';
 import './Content.css';
 
 const Content = () => (
-  <CardContextConsumer>
+  <CardContext.Consumer>
     {({
       cards,
-      isReadOnly,
-      selectCardHandler,
-      addCardHandler,
+      createCardHandler,
       deleteCardHandler,
+      isReadOnly,
       switchReadOnly,
     }) => (
       <>
@@ -28,19 +27,15 @@ const Content = () => (
           <StyledButton onClick={deleteCardHandler}>
             Delete selected cards
           </StyledButton>
-          <StyledButton onClick={addCardHandler}>Create new card</StyledButton>
+          <StyledButton onClick={createCardHandler}>Create new card</StyledButton>
         </StyledDiv>
 
         <div className="card-list">
-          <CardList
-            isReadOnly={isReadOnly}
-            cards={cards}
-            checkedForDelete={selectCardHandler}
-          />
+          <CardList cards={cards} />
         </div>
       </>
     )}
-  </CardContextConsumer>
+  </CardContext.Consumer>
 );
 
-export default Content;
+export default React.memo(Content);
