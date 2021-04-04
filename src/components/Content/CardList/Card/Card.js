@@ -19,8 +19,13 @@ class Card extends PureComponent {
     };
   }
 
-  switchColor = () => {
-    this.setState(prevState => ({ selected: !prevState.selected }));
+  componentDidUpdate = () => {
+    const { isReadOnly } = this.context;
+    const { isEditMode } = this.state;
+    if (isReadOnly && isEditMode) {
+      this.cancelChanges();
+    }
+    return true;
   };
 
   switchEditMode = () => {
@@ -49,13 +54,8 @@ class Card extends PureComponent {
     this.switchEditMode();
   };
 
-  componentDidUpdate = () => {
-    const { isReadOnly } = this.context;
-    const { isEditMode } = this.state;
-    if (isReadOnly && isEditMode) {
-      this.cancelChanges();
-    }
-    return true;
+  switchColor = () => {
+    this.setState(prevState => ({ selected: !prevState.selected }));
   };
 
   checkHandler = () => {

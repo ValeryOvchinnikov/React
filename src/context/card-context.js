@@ -6,11 +6,13 @@ import PropTypes from 'prop-types';
 const CardContext = React.createContext({
   cards: [],
   isReadOnly: false,
-  selectCardHandler: () => {},
-  deleteCardHandler: () => {},
   createCardHandler: () => {},
+  selectCardHandler: () => {},
+  updateCardHandler: () => {},
+  deleteCardHandler: () => {},
   switchReadOnly: () => {},
 });
+
 const Url =
   'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
 
@@ -72,7 +74,7 @@ export class CardContextProvider extends PureComponent {
     }));
   };
 
-  updateCardHanddler = (id, title, text) => {
+  updateCardHandler = (id, title, text) => {
     this.setState(prevState => {
       return {
         cards: prevState.cards.map(item =>
@@ -99,7 +101,7 @@ export class CardContextProvider extends PureComponent {
           isReadOnly,
           createCardHandler: this.createCardHandler,
           selectCardHandler: this.selectCardHandler,
-          updateCardHandler: this.updateCardHanddler,
+          updateCardHandler: this.updateCardHandler,
           deleteCardHandler: this.deleteCardHandler,
           switchReadOnly: this.switchReadOnly,
         }}

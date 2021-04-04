@@ -19,11 +19,8 @@ h1 {
   border: white 1px solid;
   border-bottom: white 2px solid;
   border-radius: 4px;
-
   width: 80%;
-
   padding: 8px;
-
   margin: 0 auto 5px;
   font-size: 1em;
 }
@@ -42,9 +39,11 @@ h1 {
   font-weight: 1000;
   font-size: 1.2em;
 }
+
 .btn:active {
   outline: none;
 }
+
 .btn:hover {
   opacity: 0.5;
 }

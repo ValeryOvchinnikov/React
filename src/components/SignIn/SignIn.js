@@ -10,31 +10,29 @@ const SignIn = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={submitForm} className="signin-form">
-        <div className="signin-body">
-          <h1>Sign In</h1>
-          <input
-            type="text"
-            name="username"
-            className="username-input"
-            placeholder="UserName"
-          />
+    <form onSubmit={submitForm} className="signin-form">
+      <div className="signin-body">
+        <h1>Sign In</h1>
+        <input
+          type="text"
+          name="username"
+          className="username-input"
+          placeholder="UserName"
+        />
 
-          <input
-            type="password"
-            name="password"
-            className="password-input"
-            placeholder="Password"
-          />
+        <input
+          type="password"
+          name="password"
+          className="password-input"
+          placeholder="Password"
+        />
 
-          <button type="submit" className="btn">
-            Sign In
-          </button>
-        </div>
-      </form>
+        <button type="submit" className="btn">
+          Sign In
+        </button>
+      </div>
       {isSignIn && <Redirect to="/" />}
-    </div>
+    </form>
   );
 };
 export default SignIn;

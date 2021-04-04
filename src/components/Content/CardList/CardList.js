@@ -7,12 +7,12 @@ const CardList = props => {
   return cards.map(card => {
     return (
       <Card
+        key={card.id.toString()}
         className="card"
         id={card.id}
         title={card.title}
         text={card.text}
         selected={card.selected}
-        key={card.id}
       />
     );
   });
