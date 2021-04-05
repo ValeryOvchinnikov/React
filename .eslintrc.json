@@ -20,8 +20,9 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier"],
+  "plugins": ["react", "prettier", "jsx-a11y"],
   "rules": {
+    "no-restricted-syntax": 0,
     "react/prop-types": 1,
     "react/no-access-state-in-setstate": 1,
     "complexity": ["error", 10],
@@ -39,6 +40,7 @@
     "linebreak-style": 0,
     "react/forbid-prop-types": 0,
     "no-unused-expressions": 0,
+    "no-shadow": 0,
     "import/no-named-as-default": 1,
     "curly": ["error", "all"]
   },

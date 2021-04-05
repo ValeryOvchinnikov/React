@@ -13,7 +13,7 @@ const CardContext = React.createContext({
   switchReadOnly: () => {},
 });
 
-const Url =
+const URL =
   'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
 
 export class CardContextProvider extends PureComponent {
@@ -26,7 +26,7 @@ export class CardContextProvider extends PureComponent {
   }
 
   componentDidMount() {
-    axios.get(Url).then(res => {
+    axios.get(URL).then(res => {
       this.setState({
         cards: res.data.slice(0, 15).map(pokemon => ({
           id: pokemon.Number,

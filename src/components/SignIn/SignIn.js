@@ -1,38 +1,114 @@
-import React, { useState } from 'react';
+import React, { PureComponent } from 'react';
 import './SignIn.css';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import SignInInput from './Input/SignInInput';
 
-const SignIn = () => {
-  const [isSignIn, setSignIn] = useState(false);
+class SignIn extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      form: {
+        username: {
+          elementConfig: {
+            type: 'email',
+            placeholder: 'Email',
+          },
+          value: '',
+          validation: {
+            required: true,
+            regexp: /.+@.+\..+/i,
+          },
+          valid: false,
+          touched: false,
+        },
 
-  const submitForm = () => {
-    setSignIn(true);
+        password: {
+          elementConfig: {
+            type: 'password',
+            placeholder: 'password',
+          },
+          value: '',
+          validation: {
+            required: true,
+            minLength: 8,
+            regexp: /(?=.*[0-9])(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]/g,
+          },
+          valid: false,
+          touched: false,
+        },
+      },
+      formIsValid: false,
+    };
+  }
+
+  inputChangedHandler = (event, inputIdentifier) => {
+    const updatedSignInForm = {
+      ...this.state.form,
+    };
+
+    const updatedFormElement = {
+      ...updatedSignInForm[inputIdentifier],
+    };
+
+    updatedFormElement.value = event.target.value;
+    updatedFormElement.valid = this.checkValidation(
+      updatedFormElement.value,
+      updatedFormElement.validation,
+    );
+
+    updatedFormElement.touched = true;
+    updatedSignInForm[inputIdentifier] = updatedFormElement;
+
+    let formIsValid = true;
+    for (const element in updatedSignInForm) {
+      if ({}.hasOwnProperty.call(updatedSignInForm, element)) {
+        formIsValid = updatedSignInForm[element].valid && formIsValid;
+      }
+    }
+    this.setState({
+      form: updatedSignInForm,
+      formIsValid,
+    });
   };
 
-  return (
-    <form onSubmit={submitForm} className="signin-form">
+  checkValidation = (value, rules) => {
+    let isValid = true;
+    if (rules.required) {
+      isValid = value.trim() !== '' && isValid;
+    }
+    if (rules.minLength) {
+      isValid = value.length >= rules.minLength && isValid;
+    }
+    if (rules.regexp) {
+      isValid = rules.regexp.test(value) && isValid;
+    }
+    return isValid;
+  };
+
+  render() {
+    const { form, formIsValid } = this.state;
+    return (
       <div className="signin-body">
         <h1>Sign In</h1>
-        <input
-          type="text"
-          name="username"
-          className="username-input"
-          placeholder="UserName"
-        />
+        <form className="signin-form">
+          {Object.entries(form).map(([key, value]) => (
+            <SignInInput
+              key={key}
+              {...value}
+              invalid={!value.valid}
+              changed={event => this.inputChangedHandler(event, key)}
+            />
+          ))}
 
-        <input
-          type="password"
-          name="password"
-          className="password-input"
-          placeholder="Password"
-        />
-
-        <button type="submit" className="btn">
-          Sign In
-        </button>
+          <Link to="/">
+            <button type="submit" className="btn" disabled={!formIsValid}>
+              Sign In
+            </button>
+          </Link>
+        </form>
       </div>
-      {isSignIn && <Redirect to="/" />}
-    </form>
-  );
-};
+    );
+  }
+}
+
 export default SignIn;
