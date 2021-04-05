@@ -2,9 +2,8 @@ import React from 'react';
 import Card from './Card';
 import './CardList.css';
 
-const CardList = props => {
-  const { cards } = props;
-  return cards.map(card => {
+const CardList = ({ cards }) =>
+  cards.map(card => {
     return (
       <Card
         key={card.id.toString()}
@@ -16,6 +15,5 @@ const CardList = props => {
       />
     );
   });
-};
 
 export default React.memo(CardList);
