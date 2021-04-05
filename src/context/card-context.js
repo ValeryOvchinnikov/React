@@ -1,19 +1,22 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
-const { Provider, Consumer } = React.createContext({
+const CardContext = React.createContext({
   cards: [],
   isReadOnly: false,
+  createCardHandler: () => {},
   selectCardHandler: () => {},
+  updateCardHandler: () => {},
   deleteCardHandler: () => {},
-  addCardHandler: () => {},
   switchReadOnly: () => {},
 });
-const url =
+
+const Url =
   'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
-class CardsContextProvider extends Component {
+
+export class CardContextProvider extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +26,7 @@ class CardsContextProvider extends Component {
   }
 
   componentDidMount() {
-    axios.get(url).then(res => {
+    axios.get(Url).then(res => {
       this.setState({
         cards: res.data.slice(0, 15).map(pokemon => ({
           id: pokemon.Number,
@@ -57,7 +60,7 @@ class CardsContextProvider extends Component {
     });
   };
 
-  addCardHandler = () => {
+  createCardHandler = () => {
     this.setState(prevState => ({
       cards: [
         ...prevState.cards,
@@ -71,28 +74,46 @@ class CardsContextProvider extends Component {
     }));
   };
 
+  updateCardHandler = (id, title, text) => {
+    this.setState(prevState => {
+      return {
+        cards: prevState.cards.map(item =>
+          item.id === id
+            ? {
+                ...item,
+                title,
+                text,
+              }
+            : item,
+        ),
+      };
+    });
+  };
+
   render() {
     const { cards, isReadOnly } = this.state;
     const { children } = this.props;
     return (
-      <Provider
+      <CardContext.Provider
         value={{
           cards,
           cardsCount: cards.length,
           isReadOnly,
+          createCardHandler: this.createCardHandler,
           selectCardHandler: this.selectCardHandler,
+          updateCardHandler: this.updateCardHandler,
           deleteCardHandler: this.deleteCardHandler,
-          addCardHandler: this.addCardHandler,
           switchReadOnly: this.switchReadOnly,
         }}
       >
         {children}
-      </Provider>
+      </CardContext.Provider>
     );
   }
 }
 
-CardsContextProvider.propTypes = {
+CardContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
-export { CardsContextProvider, Consumer as CardContextConsumer };
+
+export default CardContext;

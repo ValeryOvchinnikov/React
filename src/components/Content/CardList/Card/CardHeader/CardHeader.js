@@ -15,6 +15,7 @@ const CardHeader = props => {
     onChecked,
     title,
   } = props;
+
   return (
     <div className="card-header">
       {!isEditMode ? (
@@ -70,4 +71,5 @@ CardHeader.propTypes = {
   onChecked: PropTypes.func.isRequired,
   onSwitchEditMode: PropTypes.func.isRequired,
 };
-export default CardHeader;
+
+export default React.memo(CardHeader);

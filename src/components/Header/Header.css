@@ -1,18 +1,27 @@
 .header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 5px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 35% 65%;
+  grid-template-areas:
+    'nav nav nav nav'
+    'empty title title counter';
   justify-items: center;
-  width: 100%;
   background-color: #160773;
   color: #ffffff;
   letter-spacing: 1px;
 }
 
-.title {
-  grid-column-start: 2;
+.nav {
+  grid-area: nav;
+  justify-self: start;
 }
+
+.title {
+  grid-area: title;
+}
+
 .counter {
+  grid-area: counter;
   align-self: center;
   padding: 0.1em;
   background-color: #160773;

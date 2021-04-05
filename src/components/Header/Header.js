@@ -1,18 +1,24 @@
 import React from 'react';
 import './Header.css';
-import { CardContextConsumer } from '../../context/card-context';
+import CardContext from '../../context/card-context';
+import Navigation from '../Navigation';
 
-const Header = () => (
-  <div className="header">
-    <h1 className="title">Header</h1>
-    <CardContextConsumer>
-      {({ cardsCount }) => (
-        <div className="counter">
-          Cards <span className="badge badge-light">{cardsCount}</span>
-        </div>
-      )}
-    </CardContextConsumer>
-  </div>
-);
+const Header = () => {
+  return (
+    <div className="header">
+      <Navigation className="nav" />
 
-export default Header;
+      <h1 className="title">Header</h1>
+
+      <CardContext.Consumer>
+        {({ cardsCount }) => (
+          <div className="counter">
+            Cards <span>{cardsCount}</span>
+          </div>
+        )}
+      </CardContext.Consumer>
+    </div>
+  );
+};
+
+export default React.memo(Header);
