@@ -1,0 +1,16 @@
+.input-element {
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: white;
+  font: inherit;
+}
+
+.input-element:focus {
+  outline: none;
+  background-color: #ccc;
+}
+
+.validationError {
+  color: #f83333;
+}
