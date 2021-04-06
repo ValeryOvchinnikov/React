@@ -54,6 +54,11 @@ h1 {
 .btn:hover {
   opacity: 0.5;
 }
+.btn:disabled{
+    opacity: 0.1;
+    cursor: default;
+}
+
 
 .validationError {
   margin: 5px 0;
