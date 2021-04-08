@@ -75,7 +75,7 @@ class Card extends PureComponent {
           backgroundColor: selected ? '#5E4BD8' : '#2c17b1',
         }}
         className={byId ? 'card-by-id card' : 'card'}
-        onDoubleClick={dblClick}
+        onDoubleClick={!isEditMode ? dblClick : null}
       >
         <CardHeader
           title={title}
