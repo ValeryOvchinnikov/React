@@ -1,41 +1,59 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { StyledDiv, StyledButton, StyledCheckbox } from './Controls';
-import CardContext from '../../context/card-context';
+import { createCard, deleteCard, switchReadOnly } from '../../actions/actions';
 import CardList from './CardList';
+
 import './Content.css';
 
-const Content = () => (
-  <CardContext.Consumer>
-    {({
-      cards,
-      createCardHandler,
-      deleteCardHandler,
-      isReadOnly,
-      switchReadOnly,
-    }) => (
-      <>
-        <StyledDiv>
-          <StyledCheckbox
-            id="read-only"
-            type="checkbox"
-            checked={isReadOnly}
-            onChange={switchReadOnly}
-          />
+const Content = ({
+  isReadOnly,
+  switchReadOnly,
+  deleteCard,
+  createCard,
+  history,
+}) => {
+  const openCard = id => {
+    history.push(`/${id}`);
+  };
 
-          <label htmlFor="read-only">Read-Only</label>
+  return (
+    <>
+      <StyledDiv>
+        <StyledCheckbox
+          id="read-only"
+          type="checkbox"
+          checked={isReadOnly}
+          onChange={switchReadOnly}
+        />
 
-          <StyledButton onClick={deleteCardHandler}>
-            Delete selected cards
-          </StyledButton>
-          <StyledButton onClick={createCardHandler}>Create new card</StyledButton>
-        </StyledDiv>
+        <label htmlFor="read-only">Read-Only</label>
 
-        <div className="card-list">
-          <CardList cards={cards} />
-        </div>
-      </>
-    )}
-  </CardContext.Consumer>
-);
+        <StyledButton onClick={deleteCard}>Delete selected cards</StyledButton>
+        <StyledButton onClick={createCard}>Create new card</StyledButton>
+      </StyledDiv>
 
-export default React.memo(Content);
+      <div className="card-list">
+        <CardList dblClick={openCard} />
+      </div>
+    </>
+  );
+};
+Content.propTypes = {
+  isReadOnly: PropTypes.bool,
+  switchReadOnly: PropTypes.func,
+  deleteCard: PropTypes.func,
+  createCard: PropTypes.func,
+  history: PropTypes.object,
+};
+const mapStateToProps = state => ({
+  isReadOnly: state.isReadOnly,
+});
+const mapDispatchToProps = {
+  createCard,
+  deleteCard,
+  switchReadOnly,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Content);

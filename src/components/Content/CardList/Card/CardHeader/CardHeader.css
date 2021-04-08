@@ -1,6 +1,6 @@
 .card-header {
   display: flex;
-  font-size: 20px;
+  font-size: inherit;
   justify-content: space-between;
   letter-spacing: 0.5px;
   align-items: center;

@@ -1,8 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Card from './Card';
 import './CardList.css';
 
-const CardList = ({ cards }) =>
+const CardList = ({ dblClick, cards }) =>
   cards.map(card => {
     return (
       <Card
@@ -12,8 +13,12 @@ const CardList = ({ cards }) =>
         title={card.title}
         text={card.text}
         selected={card.selected}
+        dblClick={() => dblClick(card.id)}
       />
     );
   });
 
-export default React.memo(CardList);
+const mapStateToProps = state => ({
+  cards: state.cards,
+});
+export default connect(mapStateToProps, null)(CardList);
