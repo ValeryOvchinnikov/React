@@ -7,7 +7,6 @@ import Header from '../components/Header';
 import NotFound from '../components/NotFound';
 import SignIn from '../components/SignIn';
 import { fetchProducts } from '../reducers/reducer';
-// import SingleCard from '../components/Content/CardList/SingleCard';
 import Card from '../components/Content/CardList/Card/Card';
 
 class App extends PureComponent {
@@ -53,11 +52,14 @@ class App extends PureComponent {
 const mapDispatchToProps = {
   fetchProducts,
 };
+
 const mapStateToProps = state => ({
   cards: state.cards,
 });
+
 App.propTypes = {
   fetchProducts: PropTypes.func,
   cards: PropTypes.array,
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);
