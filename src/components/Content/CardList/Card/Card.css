@@ -1,9 +1,22 @@
+.card-by-id {
+  font-size: 1.5rem;
+  margin: 10px auto !important;
+  width: 60% !important;
+  height: 400px;
+}
+
+.card-by-id .checkbox {
+  display: none;
+}
+
 .card {
   box-shadow: 1px 1px 20px 0 #3a2e85;
   color: #ffffff;
   width: 220px;
   min-height: 104px;
+  margin: 5px;
 }
+
 .card-line {
   background-color: white;
   width: 95%;
