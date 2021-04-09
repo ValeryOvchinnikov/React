@@ -3,29 +3,26 @@
   margin: 10px auto !important;
   width: 60% !important;
   height: 100%;
-
 }
 .card-by-id .input-title {
-    width: 200%;
+  width: 200%;
 }
 .card-by-id .checkbox {
-    display: none;
+  display: none;
 }
-.card-by-id .card-line{
-    margin:auto;
+.card-by-id .card-line {
+  margin: auto;
 }
 
-
-.card-by-id .card-body{
-    overflow: hidden;
-    height: 100%;
+.card-by-id .card-body {
+  overflow: hidden;
+  height: 100%;
 }
 .card-by-id .input-text {
-    display: block;
-    margin: 5px 10px;
-    height: 500px;
-    width: 98%;
-
+  display: block;
+  margin: 5px 10px;
+  height: 500px;
+  width: 98%;
 }
 
 .card {

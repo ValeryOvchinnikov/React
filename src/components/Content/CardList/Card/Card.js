@@ -21,12 +21,21 @@ class Card extends PureComponent {
     };
   }
 
+  componentDidMount() {
+    const { selected } = this.state;
+    const { byId } = this.props;
+    if (byId && selected) {
+      this.checkHandler();
+    }
+  }
+
   componentDidUpdate = () => {
     const { isEditMode } = this.state;
     const { isReadOnly } = this.props;
     if (isReadOnly && isEditMode) {
       this.cancelChanges();
     }
+
     return true;
   };
 
