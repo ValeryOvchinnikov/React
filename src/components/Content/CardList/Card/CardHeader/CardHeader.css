@@ -4,12 +4,13 @@
   justify-content: space-between;
   letter-spacing: 0.5px;
   align-items: center;
+    margin: 3px;
 }
 
 .card-header h4 {
   min-height: 26px;
   max-width: 135px;
-  margin: 5px;
+  margin: 3px;
 }
 
 .buttons {
@@ -45,6 +46,5 @@
 
 .card-title {
   word-wrap: break-word;
-  max-width: 153px;
   padding-left: 6px;
 }

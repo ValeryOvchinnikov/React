@@ -1,19 +1,21 @@
 .card-body {
-  overflow: hidden;
+  height: 80%;
 }
 
 .card-text {
   margin: 9px;
   word-wrap: break-word;
+  height: 85%;
 }
 
 .input-text {
   position: relative;
   box-sizing: border-box;
-  margin: 7px;
   border: none;
   font: inherit;
   resize: none;
+  display: block;
+  margin: 7px auto;
   width: 95%;
-  height: 8em;
+  height: 95%;
 }

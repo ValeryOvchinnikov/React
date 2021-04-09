@@ -2,11 +2,30 @@
   font-size: 1.5rem;
   margin: 10px auto !important;
   width: 60% !important;
-  height: 400px;
+  height: 100%;
+
+}
+.card-by-id .input-title {
+    width: 200%;
+}
+.card-by-id .checkbox {
+    display: none;
+}
+.card-by-id .card-line{
+    margin:auto;
 }
 
-.card-by-id .checkbox {
-  display: none;
+
+.card-by-id .card-body{
+    overflow: hidden;
+    height: 100%;
+}
+.card-by-id .input-text {
+    display: block;
+    margin: 5px 10px;
+    height: 500px;
+    width: 98%;
+
 }
 
 .card {
