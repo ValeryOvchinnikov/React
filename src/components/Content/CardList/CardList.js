@@ -1,10 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Card from './Card';
 import './CardList.css';
 
-const CardList = ({ dblClick, cards }) =>
-  cards.map(card => {
+const CardList = ({ cards }) => {
+  const history = useHistory();
+  const openCard = id => {
+    history.push(`/card/${id}`);
+  };
+  return cards.map(card => {
     return (
       <Card
         key={card.id.toString()}
@@ -13,10 +18,11 @@ const CardList = ({ dblClick, cards }) =>
         title={card.title}
         text={card.text}
         selected={card.selected}
-        dblClick={() => dblClick(card.id)}
+        dblClick={() => openCard(card.id)}
       />
     );
   });
+};
 
 const mapStateToProps = state => ({
   cards: state.cards,

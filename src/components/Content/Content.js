@@ -7,17 +7,7 @@ import CardList from './CardList';
 
 import './Content.css';
 
-const Content = ({
-  isReadOnly,
-  switchReadOnly,
-  deleteCard,
-  createCard,
-  history,
-}) => {
-  const openCard = id => {
-    history.push(`/${id}`);
-  };
-
+const Content = ({ isReadOnly, switchReadOnly, deleteCard, createCard }) => {
   return (
     <>
       <StyledDiv>
@@ -35,7 +25,7 @@ const Content = ({
       </StyledDiv>
 
       <div className="card-list">
-        <CardList dblClick={openCard} />
+        <CardList />
       </div>
     </>
   );
@@ -45,7 +35,6 @@ Content.propTypes = {
   switchReadOnly: PropTypes.func,
   deleteCard: PropTypes.func,
   createCard: PropTypes.func,
-  history: PropTypes.object,
 };
 const mapStateToProps = state => ({
   isReadOnly: state.isReadOnly,

@@ -7,7 +7,7 @@ import Header from '../components/Header';
 import NotFound from '../components/NotFound';
 import SignIn from '../components/SignIn';
 import { fetchProducts } from '../store/reducers/cardReducer';
-import Card from '../components/Content/CardList/Card/Card';
+import SingleCard from '../components/Content/SingleCard';
 
 class App extends PureComponent {
   componentDidMount() {
@@ -22,26 +22,7 @@ class App extends PureComponent {
         <Switch>
           <Route path="/sign-in" exact component={SignIn} />
           <Route path="/" exact component={Content} />
-          <Route
-            path="/:id"
-            exact
-            render={({ match }) => {
-              const { cards } = this.props;
-              const card = cards.find(c => c.id === match.params.id);
-              if (!card) {
-                return <p>Card not found</p>;
-              }
-              return (
-                <Card
-                  id={card.id}
-                  title={card.title}
-                  text={card.text}
-                  selected={card.selected}
-                  byId
-                />
-              );
-            }}
-          />
+          <Route path="/card/:id" exact component={SingleCard} />
           <Route component={NotFound} />
         </Switch>
       </div>
@@ -59,7 +40,6 @@ const mapStateToProps = state => ({
 
 App.propTypes = {
   fetchProducts: PropTypes.func,
-  cards: PropTypes.array,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
