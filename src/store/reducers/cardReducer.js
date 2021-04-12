@@ -26,7 +26,7 @@ const initialState = {
 const URL =
   'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
 
-const reducer = (state = initialState, action) => {
+const cardReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_CARD:
       return {
@@ -121,4 +121,4 @@ export const fetchProducts = () => {
   };
 };
 
-export default reducer;
+export default cardReducer;

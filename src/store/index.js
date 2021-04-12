@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import reducer from '../reducers/reducer';
+import cardReducer from './reducers/cardReducer';
 
 const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducer, composeEnchancers(applyMiddleware(thunk)));
+const store = createStore(cardReducer, composeEnchancers(applyMiddleware(thunk)));
 
 export default store;

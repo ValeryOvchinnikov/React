@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { StyledDiv, StyledButton, StyledCheckbox } from './Controls';
-import { createCard, deleteCard, switchReadOnly } from '../../actions/actions';
+import { createCard, deleteCard, switchReadOnly } from '../../store/actions/actions';
 import CardList from './CardList';
 
 import './Content.css';
