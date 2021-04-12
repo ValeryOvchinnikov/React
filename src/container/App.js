@@ -6,7 +6,7 @@ import Content from '../components/Content';
 import Header from '../components/Header';
 import NotFound from '../components/NotFound';
 import SignIn from '../components/SignIn';
-import { fetchProducts } from '../store/reducers/cardReducer';
+import { fetchProducts } from '../store/actions/actions';
 import SingleCard from '../components/Content/SingleCard';
 
 class App extends PureComponent {

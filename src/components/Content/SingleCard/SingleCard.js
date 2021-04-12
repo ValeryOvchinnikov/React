@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import Card from '../CardList/Card/Card';
+import Card from '../CardList/Card';
 
 const SingleCard = ({ match }) => {
   const { id } = match.params;

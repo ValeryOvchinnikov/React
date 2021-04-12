@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid';
-import axios from 'axios';
 import {
   CREATE_CARD,
   DELETE_CARD,
@@ -10,11 +9,6 @@ import {
   FETCH_DATA_SUCCESS,
   FETCH_DATA_FAILURE,
 } from '../actions/types';
-import {
-  fetchDataBegins,
-  fetchDataFailure,
-  fetchDataSuccess,
-} from '../actions/actions';
 
 const initialState = {
   cards: [],
@@ -22,9 +16,6 @@ const initialState = {
   error: null,
   isReadOnly: false,
 };
-
-const URL =
-  'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
 
 const cardReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -96,29 +87,6 @@ const cardReducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
-
-export const fetchProducts = () => {
-  return dispatch => {
-    dispatch(fetchDataBegins());
-    axios
-      .get(URL)
-      .then(res => {
-        dispatch(
-          fetchDataSuccess(
-            res.data.slice(0, 15).map(pokemon => {
-              return {
-                id: pokemon.Number,
-                title: pokemon.Name,
-                text: pokemon.About,
-                selected: false,
-              };
-            }),
-          ),
-        );
-      })
-      .catch(err => dispatch(fetchDataFailure(err)));
-  };
 };
 
 export default cardReducer;

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   CREATE_CARD,
   DELETE_CARD,
@@ -32,3 +33,29 @@ export const fetchDataFailure = error => ({
   type: FETCH_DATA_FAILURE,
   payload: { error },
 });
+
+const URL =
+  'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
+
+export const fetchProducts = () => {
+  return dispatch => {
+    dispatch(fetchDataBegins());
+    axios
+      .get(URL)
+      .then(res => {
+        dispatch(
+          fetchDataSuccess(
+            res.data.slice(0, 15).map(pokemon => {
+              return {
+                id: pokemon.Number,
+                title: pokemon.Name,
+                text: pokemon.About,
+                selected: false,
+              };
+            }),
+          ),
+        );
+      })
+      .catch(err => dispatch(fetchDataFailure(err)));
+  };
+};
