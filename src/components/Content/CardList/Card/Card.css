@@ -1,8 +1,39 @@
+.card-by-id {
+  font-size: 1.5rem;
+  margin: 10px auto !important;
+  width: 60% !important;
+  height: 100%;
+}
+.card-by-id .input-title {
+  width: 200%;
+}
+.card-by-id .checkbox {
+  display: none;
+}
+.card-by-id .card-line {
+  margin: auto;
+}
+.card-by-id .card-title {
+  max-width: 500px;
+}
+
+.card-by-id .card-body {
+  overflow: hidden;
+  height: 100%;
+}
+.card-by-id .input-text {
+  display: block;
+  margin: 5px auto;
+  height: 500px;
+  width: 98%;
+}
+
 .card {
   box-shadow: 1px 1px 20px 0 #3a2e85;
   color: #ffffff;
   width: 220px;
   min-height: 104px;
+  margin: 5px;
 }
 
 .card-line {

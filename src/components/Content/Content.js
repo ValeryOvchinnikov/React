@@ -1,41 +1,48 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { StyledDiv, StyledButton, StyledCheckbox } from './Controls';
-import CardContext from '../../context/card-context';
+import { createCard, deleteCard, switchReadOnly } from '../../store/actions/actions';
 import CardList from './CardList';
+
 import './Content.css';
 
-const Content = () => (
-  <CardContext.Consumer>
-    {({
-      cards,
-      createCardHandler,
-      deleteCardHandler,
-      isReadOnly,
-      switchReadOnly,
-    }) => (
-      <>
-        <StyledDiv>
-          <StyledCheckbox
-            id="read-only"
-            type="checkbox"
-            checked={isReadOnly}
-            onChange={switchReadOnly}
-          />
+const Content = ({ isReadOnly, switchReadOnly, deleteCard, createCard }) => {
+  return (
+    <>
+      <StyledDiv>
+        <StyledCheckbox
+          id="read-only"
+          type="checkbox"
+          checked={isReadOnly}
+          onChange={switchReadOnly}
+        />
 
-          <label htmlFor="read-only">Read-Only</label>
+        <label htmlFor="read-only">Read-Only</label>
 
-          <StyledButton onClick={deleteCardHandler}>
-            Delete selected cards
-          </StyledButton>
-          <StyledButton onClick={createCardHandler}>Create new card</StyledButton>
-        </StyledDiv>
+        <StyledButton onClick={deleteCard}>Delete selected cards</StyledButton>
+        <StyledButton onClick={createCard}>Create new card</StyledButton>
+      </StyledDiv>
 
-        <div className="card-list">
-          <CardList cards={cards} />
-        </div>
-      </>
-    )}
-  </CardContext.Consumer>
-);
+      <div className="card-list">
+        <CardList />
+      </div>
+    </>
+  );
+};
+Content.propTypes = {
+  isReadOnly: PropTypes.bool,
+  switchReadOnly: PropTypes.func,
+  deleteCard: PropTypes.func,
+  createCard: PropTypes.func,
+};
+const mapStateToProps = state => ({
+  isReadOnly: state.isReadOnly,
+});
+const mapDispatchToProps = {
+  createCard,
+  deleteCard,
+  switchReadOnly,
+};
 
-export default React.memo(Content);
+export default connect(mapStateToProps, mapDispatchToProps)(Content);

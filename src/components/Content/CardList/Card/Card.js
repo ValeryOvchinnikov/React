@@ -1,15 +1,17 @@
 import React, { PureComponent } from 'react';
 import './Card.css';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { updateCard, selectCard } from '../../../../store/actions/actions';
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import withLoadingDelay from '../../../../hoc/withLoadingDelay';
-import CardContext from '../../../../context/card-context';
 
 class Card extends PureComponent {
   constructor(props) {
     super(props);
     const { id, title, text, selected } = this.props;
+
     this.state = {
       isEditMode: false,
       id,
@@ -19,12 +21,21 @@ class Card extends PureComponent {
     };
   }
 
+  componentDidMount() {
+    const { selected } = this.state;
+    const { byId } = this.props;
+    if (byId && selected) {
+      this.checkHandler();
+    }
+  }
+
   componentDidUpdate = () => {
-    const { isReadOnly } = this.context;
     const { isEditMode } = this.state;
+    const { isReadOnly } = this.props;
     if (isReadOnly && isEditMode) {
       this.cancelChanges();
     }
+
     return true;
   };
 
@@ -44,7 +55,7 @@ class Card extends PureComponent {
 
   saveChanges = () => {
     const { id, title, text } = this.state;
-    this.context.updateCardHandler(id, title, text);
+    this.props.updateCard(id, title, text);
     this.switchEditMode();
   };
 
@@ -59,22 +70,21 @@ class Card extends PureComponent {
   };
 
   checkHandler = () => {
-    const { selectCardHandler } = this.context;
     const { id } = this.state;
-    selectCardHandler(id);
+    this.props.selectCard(id);
     this.switchColor();
   };
 
   render() {
     const { selected, title, isEditMode, text } = this.state;
-    const { isReadOnly } = this.context;
-
+    const { byId, dblClick, isReadOnly } = this.props;
     return (
       <div
         style={{
           backgroundColor: selected ? '#5E4BD8' : '#2c17b1',
         }}
-        className="card"
+        className={byId ? 'card-by-id card' : 'card'}
+        onDoubleClick={!isEditMode ? dblClick : null}
       >
         <CardHeader
           title={title}
@@ -102,7 +112,19 @@ Card.propTypes = {
   title: PropTypes.string,
   text: PropTypes.string,
   selected: PropTypes.bool,
+  updateCard: PropTypes.func,
+  selectCard: PropTypes.func,
+  dblClick: PropTypes.func,
+  isReadOnly: PropTypes.bool,
+  byId: PropTypes.bool,
 };
 
-Card.contextType = CardContext;
-export default withLoadingDelay(Card);
+const mapStateToProps = state => ({
+  isReadOnly: state.isReadOnly,
+});
+
+const mapDispatchToProps = {
+  updateCard,
+  selectCard,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(withLoadingDelay(Card));
