@@ -10,6 +10,9 @@ const Navigation = () => (
     <li className="nav-item">
       <NavItem link="/sign-in">Sign In</NavItem>
     </li>
+    <li className="nav-item">
+      <NavItem link="/settings">Settings</NavItem>
+    </li>
   </ul>
 );
-export default React.memo(Navigation);
+export default Navigation;

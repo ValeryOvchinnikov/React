@@ -5,7 +5,8 @@ import Card from '../CardList/Card';
 
 const SingleCard = ({ match }) => {
   const { id } = match.params;
-  const card = useSelector(state => state.cards.find(c => c.id === id));
+  const findCard = state => state.cards.find(c => c.id === id);
+  const card = useSelector(findCard);
   if (!card) {
     return <p>Card not found</p>;
   }

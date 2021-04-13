@@ -9,7 +9,8 @@
     "airbnb",
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:react-redux/recommended"
   ],
   "parser": "babel-eslint",
 
@@ -20,7 +21,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier", "jsx-a11y"],
+  "plugins": ["react", "prettier", "jsx-a11y", "react-redux"],
   "rules": {
     "no-restricted-syntax": 0,
     "react/prop-types": 1,

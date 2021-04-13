@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import './Card.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateCard, selectCard } from '../../../../store/actions/actions';
+import { updateCard, selectCard } from '../../../../store/actions/cardActions';
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import withLoadingDelay from '../../../../hoc/withLoadingDelay';

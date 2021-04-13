@@ -1,3 +1,7 @@
+import { connect } from 'react-redux';
 import CardList from './CardList';
 
-export default CardList;
+const mapStateToProps = state => ({
+  cards: state.cards,
+});
+export default connect(mapStateToProps)(CardList);
