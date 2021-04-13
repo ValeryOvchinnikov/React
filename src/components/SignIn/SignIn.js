@@ -42,8 +42,9 @@ class SignIn extends PureComponent {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
+    const { form } = this.state;
     const updatedSignInForm = {
-      ...this.state.form,
+      ...form,
     };
 
     const updatedFormElement = {
