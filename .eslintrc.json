@@ -23,6 +23,13 @@
   },
   "plugins": ["react", "prettier", "jsx-a11y", "react-redux"],
   "rules": {
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ],
     "no-restricted-syntax": 0,
     "react/prop-types": 1,
     "react/no-access-state-in-setstate": 1,

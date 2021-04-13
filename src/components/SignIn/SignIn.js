@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
 import './SignIn.css';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import SignInInput from './Input/SignInInput';
+import { authorize } from '../../store/reducers/authReducer';
 
 class SignIn extends PureComponent {
   constructor(props) {
@@ -72,6 +75,13 @@ class SignIn extends PureComponent {
     });
   };
 
+  auth = () => {
+    this.props.authorize({
+      username: this.state.form.username.value,
+      password: this.state.form.password.value,
+    });
+  };
+
   checkValidation = (value, rules) => {
     let isValid = true;
     if (rules.required) {
@@ -102,7 +112,12 @@ class SignIn extends PureComponent {
           ))}
 
           <Link to="/">
-            <button type="submit" className="btn" disabled={!formIsValid}>
+            <button
+              type="submit"
+              onClick={this.auth}
+              className="btn"
+              disabled={!formIsValid}
+            >
               Sign In
             </button>
           </Link>
@@ -112,4 +127,12 @@ class SignIn extends PureComponent {
   }
 }
 
-export default SignIn;
+const mapDispatchToProps = {
+  authorize,
+};
+
+SignIn.propTypes = {
+  authorize: PropTypes.func,
+};
+
+export default connect(null, mapDispatchToProps)(SignIn);

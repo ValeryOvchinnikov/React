@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import Settings from './Settings';
-import { switchReadOnly } from '../../store/actions/cardActions';
+import { switchReadOnly } from '../../store/reducers/cardReducer';
 
 const mapStateToProps = state => ({
-  isReadOnly: state.isReadOnly,
+  isReadOnly: state.cards.isReadOnly,
 });
 const mapDispatchToProps = {
   switchReadOnly,

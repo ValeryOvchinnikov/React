@@ -1,12 +1,8 @@
 import { connect } from 'react-redux';
 import App from './App';
-import { fetchProducts } from '../../store/actions/cardActions';
+import { authorize } from '../../store/reducers/authReducer';
 
 const mapDispatchToProps = {
-  fetchProducts,
+  authorize,
 };
-
-const mapStateToProps = state => ({
-  cards: state.cards,
-});
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

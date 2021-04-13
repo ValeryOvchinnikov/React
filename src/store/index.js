@@ -1,6 +1,6 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import cardReducer from './reducers/cardReducer';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import cardsReducer from './reducers/cardReducer';
+import authReducer from './reducers/authReducer';
 
 const logger = store => next => action => {
   let result;
@@ -14,8 +14,16 @@ const logger = store => next => action => {
   return result;
 };
 
-const middleware = applyMiddleware(thunk, logger);
-const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(cardReducer, composeEnchancers(middleware));
+const middleware = getDefaultMiddleware({
+  immutableCheck: false,
+  serializableCheck: false,
+  thunk: true,
+}).concat(logger);
+
+const store = configureStore({
+  reducer: { cards: cardsReducer, auth: authReducer },
+  middleware,
+  devTools: process.env.NODE_ENV !== 'production',
+});
 
 export default store;
