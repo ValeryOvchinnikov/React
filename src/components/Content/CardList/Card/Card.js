@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import './Card.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateCard, selectCard } from '../../../../store/actions/actions';
+import { updateCard, selectCard } from '../../../../store/reducers/cardReducer';
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import withLoadingDelay from '../../../../hoc/withLoadingDelay';
@@ -55,7 +55,7 @@ class Card extends PureComponent {
 
   saveChanges = () => {
     const { id, title, text } = this.state;
-    this.props.updateCard(id, title, text);
+    this.props.updateCard({ id, title, text });
     this.switchEditMode();
   };
 
@@ -71,7 +71,7 @@ class Card extends PureComponent {
 
   checkHandler = () => {
     const { id } = this.state;
-    this.props.selectCard(id);
+    this.props.selectCard({ id });
     this.switchColor();
   };
 
@@ -120,7 +120,7 @@ Card.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  isReadOnly: state.isReadOnly,
+  isReadOnly: state.cards.isReadOnly,
 });
 
 const mapDispatchToProps = {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Card from './Card';
 import './CardList.css';
 
@@ -25,6 +25,7 @@ const CardList = ({ cards }) => {
 };
 
 const mapStateToProps = state => ({
-  cards: state.cards,
+  cards: state.cards.cards,
 });
-export default connect(mapStateToProps, null)(CardList);
+
+export default connect(mapStateToProps)(CardList);

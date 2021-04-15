@@ -4,7 +4,7 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-import App from './container/App';
+import App from './container/AppComponent';
 
 ReactDOM.render(
   <React.StrictMode>

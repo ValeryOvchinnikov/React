@@ -1,28 +1,22 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { StyledDiv, StyledButton, StyledCheckbox } from './Controls';
-import { createCard, deleteCard, switchReadOnly } from '../../store/actions/actions';
+import { connect } from 'react-redux';
+import { createCard, deleteCard } from '../../store/reducers/cardReducer';
+
+import { StyledDiv, StyledButton } from './StyledComponent/Controls';
 import CardList from './CardList';
 
 import './Content.css';
 
-const Content = ({ isReadOnly, switchReadOnly, deleteCard, createCard }) => {
+const Content = ({ onDeleteCard, onCreateCard, isReadOnly }) => {
   return (
     <>
-      <StyledDiv>
-        <StyledCheckbox
-          id="read-only"
-          type="checkbox"
-          checked={isReadOnly}
-          onChange={switchReadOnly}
-        />
-
-        <label htmlFor="read-only">Read-Only</label>
-
-        <StyledButton onClick={deleteCard}>Delete selected cards</StyledButton>
-        <StyledButton onClick={createCard}>Create new card</StyledButton>
-      </StyledDiv>
+      {!isReadOnly && (
+        <StyledDiv>
+          <StyledButton onClick={onDeleteCard}>Delete selected cards</StyledButton>
+          <StyledButton onClick={onCreateCard}>Create new card</StyledButton>
+        </StyledDiv>
+      )}
 
       <div className="card-list">
         <CardList />
@@ -30,19 +24,19 @@ const Content = ({ isReadOnly, switchReadOnly, deleteCard, createCard }) => {
     </>
   );
 };
+
 Content.propTypes = {
+  onDeleteCard: PropTypes.func,
+  onCreateCard: PropTypes.func,
   isReadOnly: PropTypes.bool,
-  switchReadOnly: PropTypes.func,
-  deleteCard: PropTypes.func,
-  createCard: PropTypes.func,
 };
+
 const mapStateToProps = state => ({
-  isReadOnly: state.isReadOnly,
+  isReadOnly: state.cards.isReadOnly,
 });
 const mapDispatchToProps = {
-  createCard,
-  deleteCard,
-  switchReadOnly,
+  onCreateCard: createCard,
+  onDeleteCard: deleteCard,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);
