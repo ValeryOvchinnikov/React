@@ -7,7 +7,7 @@ import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import withLoadingDelay from '../../../../hoc/withLoadingDelay';
 
-class Card extends PureComponent {
+export class Card extends PureComponent {
   constructor(props) {
     super(props);
     const { id, title, text, selected } = this.props;
@@ -107,6 +107,7 @@ class Card extends PureComponent {
     );
   }
 }
+
 Card.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
@@ -119,7 +120,7 @@ Card.propTypes = {
   byId: PropTypes.bool,
 };
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   isReadOnly: state.cards.isReadOnly,
 });
 
