@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Content from '../../components/Content';
 import Header from '../../components/Header';
@@ -9,8 +9,9 @@ import SignIn from '../../components/SignIn';
 import SingleCard from '../../components/Content/SingleCard';
 import Settings from '../../components/Settings';
 import { fetchCards } from '../../store/actions/cardActions';
+import { authorize } from '../../store/reducers/authReducer';
 
-const App = ({ authorize }) => {
+const App = ({ auth }) => {
   const dispatch = useDispatch();
   const getStatus = state => state.cards.status;
   const cardStatus = useSelector(getStatus);
@@ -22,9 +23,10 @@ const App = ({ authorize }) => {
   }, [cardStatus]);
 
   const token = JSON.parse(localStorage.getItem('auth-token'));
+
   useEffect(() => {
     if (token) {
-      authorize(token.authData);
+      auth(token.authData);
     }
   }, []);
 
@@ -42,6 +44,10 @@ const App = ({ authorize }) => {
   );
 };
 App.propTypes = {
-  authorize: PropTypes.func,
+  auth: PropTypes.func,
 };
-export default App;
+
+const mapDispatchToProps = {
+  auth: authorize,
+};
+export default connect(null, mapDispatchToProps)(App);

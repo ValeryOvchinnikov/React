@@ -1,10 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import NavItem from './NavItem';
 import './Navigation.css';
+import { logOut } from '../../store/reducers/authReducer';
 
-const Navigation = ({ logOut }) => {
+const Navigation = ({ onLogOut }) => {
   const getRole = state => state.auth.currentUser.role;
   const role = useSelector(getRole);
   const getAuthStatus = state => state.auth.isAuth;
@@ -28,7 +29,7 @@ const Navigation = ({ logOut }) => {
         </li>
       ) : (
         <li className="nav-item">
-          <NavItem link={null} onClick={logOut}>
+          <NavItem link={null} onClick={onLogOut}>
             LogOut
           </NavItem>
         </li>
@@ -38,7 +39,11 @@ const Navigation = ({ logOut }) => {
 };
 
 Navigation.propTypes = {
-  logOut: PropTypes.func,
+  onLogOut: PropTypes.func,
 };
 
-export default Navigation;
+const mapDispatchToProps = {
+  onLogOut: logOut,
+};
+
+export default connect(null, mapDispatchToProps)(Navigation);

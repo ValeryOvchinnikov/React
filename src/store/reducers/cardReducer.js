@@ -5,7 +5,6 @@ import { fetchCards } from '../actions/cardActions';
 const initialState = {
   cards: [],
   status: 'idle',
-  loading: false,
   error: null,
   isReadOnly: false,
 };

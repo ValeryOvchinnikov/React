@@ -9,8 +9,7 @@
     "airbnb",
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended",
-    "plugin:react-redux/recommended"
+    "plugin:prettier/recommended"
   ],
   "parser": "babel-eslint",
 
@@ -21,7 +20,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier", "jsx-a11y", "react-redux"],
+  "plugins": ["react", "prettier", "jsx-a11y"],
   "rules": {
     "no-param-reassign": [
       "error",
@@ -30,6 +29,7 @@
         "ignorePropertyModificationsFor": ["state"]
       }
     ],
+    "no-console": "off",
     "no-restricted-syntax": 0,
     "react/prop-types": 1,
     "react/no-access-state-in-setstate": 1,
